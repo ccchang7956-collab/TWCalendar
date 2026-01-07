@@ -1,0 +1,350 @@
+/**
+ * 行事曆元件模組
+ */
+
+class CalendarComponent {
+    constructor(containerId) {
+        this.container = document.getElementById(containerId);
+        this.monthViewEl = document.getElementById('monthView');
+        this.yearViewEl = document.getElementById('yearView');
+        this.titleEl = document.getElementById('calendarTitle');
+        this.currentDate = new Date();
+        this.currentMonth = this.currentDate.getMonth();
+        this.currentYear = this.currentDate.getFullYear();
+        this.calendarData = [];
+        this.holidays = [];
+        this.strategies = [];
+        this.leaveDays = new Set();
+        this.showLeaveDays = false; // 預設不顯示建議請假日
+        this.viewMode = 'month'; // 'month' 或 'year'
+    }
+
+    async init() {
+        // 載入資料
+        this.calendarData = await utils.generateCalendarData();
+        const holidayData = await utils.loadHolidayData();
+        if (holidayData) {
+            this.holidays = holidayData.holidays;
+            this.strategies = holidayData.strategies;
+
+            // 收集所有建議請假日
+            this.strategies.forEach(s => {
+                if (s.leaveDays) {
+                    s.leaveDays.forEach(d => this.leaveDays.add(d));
+                }
+            });
+        }
+
+        this.render();
+        this.bindEvents();
+    }
+
+    bindEvents() {
+        document.getElementById('prevMonth').addEventListener('click', () => this.prevMonth());
+        document.getElementById('nextMonth').addEventListener('click', () => this.nextMonth());
+        document.getElementById('todayBtn').addEventListener('click', () => this.goToToday());
+
+        // 顯示建議請假日開關
+        const showLeaveDaysCheckbox = document.getElementById('showLeaveDays');
+        if (showLeaveDaysCheckbox) {
+            showLeaveDaysCheckbox.addEventListener('change', (e) => {
+                this.showLeaveDays = e.target.checked;
+                this.render();
+            });
+        }
+
+        // 檢視模式切換
+        const monthViewBtn = document.getElementById('monthViewBtn');
+        const yearViewBtn = document.getElementById('yearViewBtn');
+
+        if (monthViewBtn) {
+            monthViewBtn.addEventListener('click', () => this.setViewMode('month'));
+        }
+        if (yearViewBtn) {
+            yearViewBtn.addEventListener('click', () => this.setViewMode('year'));
+        }
+    }
+
+    setViewMode(mode) {
+        this.viewMode = mode;
+
+        // 更新按鈕狀態
+        const monthViewBtn = document.getElementById('monthViewBtn');
+        const yearViewBtn = document.getElementById('yearViewBtn');
+
+        if (mode === 'month') {
+            monthViewBtn?.classList.add('view-toggle__btn--active');
+            yearViewBtn?.classList.remove('view-toggle__btn--active');
+            this.monthViewEl?.classList.remove('hidden');
+            this.yearViewEl?.classList.add('hidden');
+        } else {
+            monthViewBtn?.classList.remove('view-toggle__btn--active');
+            yearViewBtn?.classList.add('view-toggle__btn--active');
+            this.monthViewEl?.classList.add('hidden');
+            this.yearViewEl?.classList.remove('hidden');
+        }
+
+        this.render();
+    }
+
+    prevMonth() {
+        if (this.viewMode === 'year') {
+            // 年度檢視不允許切換年份（只限 2026 年）
+            return;
+        } else {
+            this.currentMonth--;
+            if (this.currentMonth < 0) {
+                // 不允許切換到 2025 年
+                this.currentMonth = 0;
+            }
+        }
+        this.render();
+    }
+
+    nextMonth() {
+        if (this.viewMode === 'year') {
+            // 年度檢視不允許切換年份（只限 2026 年）
+            return;
+        } else {
+            this.currentMonth++;
+            if (this.currentMonth > 11) {
+                // 不允許切換到 2027 年
+                this.currentMonth = 11;
+            }
+        }
+        this.render();
+    }
+
+    goToToday() {
+        const today = new Date();
+        this.currentMonth = today.getMonth();
+        this.currentYear = today.getFullYear();
+        this.render();
+    }
+
+    render() {
+        if (this.viewMode === 'year') {
+            this.renderYearView();
+        } else {
+            this.renderMonthView();
+        }
+    }
+
+    renderMonthView() {
+        // 更新標題
+        const monthNames = ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'];
+        this.titleEl.textContent = `${this.currentYear} 年 ${monthNames[this.currentMonth]}`;
+
+        // 清除現有日期（保留表頭）
+        const headers = this.container.querySelectorAll('.calendar-grid__header');
+        this.container.innerHTML = '';
+        headers.forEach(h => this.container.appendChild(h.cloneNode(true)));
+
+        // 取得當月第一天與最後一天
+        const firstDay = new Date(this.currentYear, this.currentMonth, 1);
+        const lastDay = new Date(this.currentYear, this.currentMonth + 1, 0);
+        const startDayOfWeek = firstDay.getDay();
+        const daysInMonth = lastDay.getDate();
+
+        // 填充空白日期
+        for (let i = 0; i < startDayOfWeek; i++) {
+            const emptyDiv = document.createElement('div');
+            emptyDiv.className = 'calendar-grid__day calendar-grid__day--empty';
+            this.container.appendChild(emptyDiv);
+        }
+
+        // 填充日期
+        for (let day = 1; day <= daysInMonth; day++) {
+            const dateStr = `${this.currentYear}-${String(this.currentMonth + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+            const dayData = this.calendarData.find(d => d.date === dateStr);
+
+            const dayDiv = document.createElement('div');
+            dayDiv.className = 'calendar-grid__day';
+            dayDiv.setAttribute('data-date', dateStr);
+
+            // 判斷日期類型
+            const isHoliday = dayData?.isHoliday;
+            const isWeekendDay = utils.isWeekend(dateStr);
+            const isTodayDate = utils.isToday(dateStr);
+            const isLeaveDay = this.leaveDays.has(dateStr) && this.showLeaveDays; // 只有開啟時才顯示
+            const holidayInfo = this.holidays.find(h => h.date === dateStr);
+
+            // 添加樣式類別
+            if (isLeaveDay) {
+                // 建議請假日（開啟時才顯示）
+                dayDiv.classList.add('calendar-grid__day--leave');
+            } else if (isTodayDate) {
+                dayDiv.classList.add('calendar-grid__day--today');
+            } else if (isHoliday || isWeekendDay) {
+                // 所有假日與週末統一使用紅色
+                dayDiv.classList.add('calendar-grid__day--holiday');
+            }
+
+            // 日期數字
+            const numberSpan = document.createElement('span');
+            numberSpan.className = 'calendar-grid__day-number';
+            numberSpan.textContent = day;
+            dayDiv.appendChild(numberSpan);
+
+            // 節日標籤
+            if (dayData?.note || holidayInfo) {
+                const labelSpan = document.createElement('span');
+                labelSpan.className = 'calendar-grid__day-label';
+                labelSpan.textContent = dayData?.note || holidayInfo?.name || '';
+                labelSpan.title = dayData?.note || holidayInfo?.name || '';
+                dayDiv.appendChild(labelSpan);
+            } else if (isLeaveDay) {
+                const labelSpan = document.createElement('span');
+                labelSpan.className = 'calendar-grid__day-label';
+                labelSpan.textContent = '請假';
+                labelSpan.style.color = 'var(--color-accent)';
+                dayDiv.appendChild(labelSpan);
+            }
+
+            // 點擊事件
+            dayDiv.addEventListener('click', () => this.handleDayClick(dateStr, dayData, holidayInfo));
+
+            this.container.appendChild(dayDiv);
+        }
+    }
+
+    renderYearView() {
+        // 更新標題
+        this.titleEl.textContent = `${this.currentYear} 年`;
+
+        // 清空年度檢視容器
+        this.yearViewEl.innerHTML = '';
+
+        const monthNames = ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'];
+        const dayHeaders = ['日', '一', '二', '三', '四', '五', '六'];
+
+        for (let month = 0; month < 12; month++) {
+            const monthDiv = document.createElement('div');
+            monthDiv.className = 'year-view__month';
+            monthDiv.setAttribute('data-month', month);
+
+            // 月份標題
+            const titleDiv = document.createElement('div');
+            titleDiv.className = 'year-view__month-title';
+            titleDiv.textContent = monthNames[month];
+            monthDiv.appendChild(titleDiv);
+
+            // 迷你月曆格線
+            const gridDiv = document.createElement('div');
+            gridDiv.className = 'year-view__mini-grid';
+
+            // 星期表頭
+            dayHeaders.forEach(header => {
+                const headerDiv = document.createElement('div');
+                headerDiv.className = 'year-view__mini-header';
+                headerDiv.textContent = header;
+                gridDiv.appendChild(headerDiv);
+            });
+
+            // 取得當月資料
+            const firstDay = new Date(this.currentYear, month, 1);
+            const lastDay = new Date(this.currentYear, month + 1, 0);
+            const startDayOfWeek = firstDay.getDay();
+            const daysInMonth = lastDay.getDate();
+
+            // 空白日期
+            for (let i = 0; i < startDayOfWeek; i++) {
+                const emptyDiv = document.createElement('div');
+                emptyDiv.className = 'year-view__mini-day year-view__mini-day--empty';
+                emptyDiv.textContent = '.';
+                gridDiv.appendChild(emptyDiv);
+            }
+
+            // 填充日期
+            for (let day = 1; day <= daysInMonth; day++) {
+                const dateStr = `${this.currentYear}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+                const dayData = this.calendarData.find(d => d.date === dateStr);
+
+                const dayDiv = document.createElement('div');
+                dayDiv.className = 'year-view__mini-day';
+                dayDiv.textContent = day;
+
+                const isHoliday = dayData?.isHoliday;
+                const isWeekendDay = utils.isWeekend(dateStr);
+                const isTodayDate = utils.isToday(dateStr);
+                const isLeaveDay = this.leaveDays.has(dateStr) && this.showLeaveDays;
+
+                if (isLeaveDay) {
+                    dayDiv.classList.add('year-view__mini-day--leave');
+                } else if (isTodayDate) {
+                    dayDiv.classList.add('year-view__mini-day--today');
+                } else if (isHoliday || isWeekendDay) {
+                    dayDiv.classList.add('year-view__mini-day--holiday');
+                }
+
+                gridDiv.appendChild(dayDiv);
+            }
+
+            monthDiv.appendChild(gridDiv);
+
+            // 點擊月份縮圖切換到月份檢視
+            monthDiv.addEventListener('click', () => {
+                this.currentMonth = month;
+                this.setViewMode('month');
+            });
+
+            this.yearViewEl.appendChild(monthDiv);
+        }
+    }
+
+    handleDayClick(dateStr, dayData, holidayInfo) {
+        // 找出該日期相關的攻略
+        const relatedStrategy = this.strategies.find(s => {
+            return dateStr >= s.startDate && dateStr <= s.endDate;
+        });
+
+        let message = `📅 ${utils.formatDate(dateStr, 'YYYY年M月D日')} (${utils.getDayOfWeek(dateStr)})`;
+
+        if (dayData?.note) {
+            message += `\n🎉 ${dayData.note}`;
+        }
+
+        if (this.leaveDays.has(dateStr)) {
+            message += '\n💡 建議請假日';
+        }
+
+        if (relatedStrategy) {
+            message += `\n\n🎯 相關攻略：${relatedStrategy.name}`;
+            message += `\n${relatedStrategy.description}`;
+        }
+
+        utils.showToast(message.split('\n')[0]);
+    }
+
+    // 跳轉到指定日期
+    goToDate(dateStr) {
+        const date = new Date(dateStr);
+        this.currentMonth = date.getMonth();
+        this.currentYear = date.getFullYear();
+
+        // 如果在年度檢視，切換到月份檢視
+        if (this.viewMode === 'year') {
+            this.setViewMode('month');
+        } else {
+            this.render();
+        }
+
+        // 高亮動畫
+        setTimeout(() => {
+            const dayEl = this.container.querySelector(`[data-date="${dateStr}"]`);
+            if (dayEl) {
+                dayEl.style.animation = 'pulse 0.5s ease 3';
+                dayEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        }, 100);
+    }
+
+    // 切換顯示建議請假日
+    toggleLeaveDays(show) {
+        this.showLeaveDays = show;
+        this.render();
+    }
+}
+
+// 匯出
+window.CalendarComponent = CalendarComponent;

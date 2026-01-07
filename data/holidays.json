@@ -1,0 +1,278 @@
+{
+  "year": 2026,
+  "rocYear": 115,
+  "holidays": [
+    {
+      "date": "2026-01-01",
+      "name": "開國紀念日",
+      "type": "national"
+    },
+    {
+      "date": "2026-02-15",
+      "name": "小年夜",
+      "type": "lunar"
+    },
+    {
+      "date": "2026-02-16",
+      "name": "農曆除夕",
+      "type": "lunar"
+    },
+    {
+      "date": "2026-02-17",
+      "name": "春節",
+      "type": "lunar"
+    },
+    {
+      "date": "2026-02-18",
+      "name": "春節",
+      "type": "lunar"
+    },
+    {
+      "date": "2026-02-19",
+      "name": "春節",
+      "type": "lunar"
+    },
+    {
+      "date": "2026-02-20",
+      "name": "補假",
+      "type": "compensatory"
+    },
+    {
+      "date": "2026-02-27",
+      "name": "補假",
+      "type": "compensatory"
+    },
+    {
+      "date": "2026-02-28",
+      "name": "和平紀念日",
+      "type": "national"
+    },
+    {
+      "date": "2026-04-03",
+      "name": "補假",
+      "type": "compensatory"
+    },
+    {
+      "date": "2026-04-04",
+      "name": "兒童節",
+      "type": "national"
+    },
+    {
+      "date": "2026-04-05",
+      "name": "清明節",
+      "type": "national"
+    },
+    {
+      "date": "2026-04-06",
+      "name": "補假",
+      "type": "compensatory"
+    },
+    {
+      "date": "2026-05-01",
+      "name": "勞動節",
+      "type": "labor"
+    },
+    {
+      "date": "2026-06-19",
+      "name": "端午節",
+      "type": "lunar"
+    },
+    {
+      "date": "2026-09-25",
+      "name": "中秋節",
+      "type": "lunar"
+    },
+    {
+      "date": "2026-09-28",
+      "name": "孔子誕辰紀念日/教師節",
+      "type": "national"
+    },
+    {
+      "date": "2026-10-09",
+      "name": "補假",
+      "type": "compensatory"
+    },
+    {
+      "date": "2026-10-10",
+      "name": "國慶日",
+      "type": "national"
+    },
+    {
+      "date": "2026-10-25",
+      "name": "臺灣光復暨金門古寧頭大捷紀念日",
+      "type": "national"
+    },
+    {
+      "date": "2026-10-26",
+      "name": "補假",
+      "type": "compensatory"
+    },
+    {
+      "date": "2026-12-25",
+      "name": "行憲紀念日",
+      "type": "national"
+    }
+  ],
+  "calendarData": [],
+  "strategies": [
+    {
+      "id": "spring-festival",
+      "name": "春節連假",
+      "startDate": "2026-02-14",
+      "endDate": "2026-02-22",
+      "leaveDays": [],
+      "leaveCount": 0,
+      "totalDays": 9,
+      "cpValue": 0,
+      "description": "自動放假 9 天，免請假（2/14 小年夜 ~ 2/22 週日）",
+      "forLabor": true
+    },
+    {
+      "id": "spring-228",
+      "name": "🏆 春節 + 228 超長假",
+      "startDate": "2026-02-14",
+      "endDate": "2026-03-01",
+      "leaveDays": [
+        "2026-02-23",
+        "2026-02-24",
+        "2026-02-25",
+        "2026-02-26"
+      ],
+      "leaveCount": 4,
+      "totalDays": 16,
+      "cpValue": 4.0,
+      "description": "請 4 天休 16 天，CP 值最高的超長假攻略！",
+      "forLabor": true
+    },
+    {
+      "id": "qingming",
+      "name": "清明連假",
+      "startDate": "2026-04-03",
+      "endDate": "2026-04-06",
+      "leaveDays": [],
+      "leaveCount": 0,
+      "totalDays": 4,
+      "cpValue": 0,
+      "description": "自動放假 4 天，免請假",
+      "forLabor": true
+    },
+    {
+      "id": "labor",
+      "name": "⚠️ 勞動節連假",
+      "startDate": "2026-05-01",
+      "endDate": "2026-05-03",
+      "leaveDays": [],
+      "leaveCount": 0,
+      "totalDays": 3,
+      "cpValue": 0,
+      "description": "自動放假 3 天（僅勞工適用，公務員不適用）",
+      "forLabor": true,
+      "laborOnly": true
+    },
+    {
+      "id": "dragon-boat",
+      "name": "端午連假",
+      "startDate": "2026-06-19",
+      "endDate": "2026-06-21",
+      "leaveDays": [],
+      "leaveCount": 0,
+      "totalDays": 3,
+      "cpValue": 0,
+      "description": "自動放假 3 天，免請假",
+      "forLabor": true
+    },
+    {
+      "id": "mid-autumn",
+      "name": "中秋 + 教師節",
+      "startDate": "2026-09-25",
+      "endDate": "2026-09-28",
+      "leaveDays": [],
+      "leaveCount": 0,
+      "totalDays": 4,
+      "cpValue": 0,
+      "description": "自動放假 4 天，免請假",
+      "forLabor": true
+    },
+    {
+      "id": "national-day",
+      "name": "國慶連假",
+      "startDate": "2026-10-09",
+      "endDate": "2026-10-11",
+      "leaveDays": [],
+      "leaveCount": 0,
+      "totalDays": 3,
+      "cpValue": 0,
+      "description": "自動放假 3 天，免請假",
+      "forLabor": true
+    },
+    {
+      "id": "retrocession",
+      "name": "光復節連假",
+      "startDate": "2026-10-24",
+      "endDate": "2026-10-26",
+      "leaveDays": [],
+      "leaveCount": 0,
+      "totalDays": 3,
+      "cpValue": 0,
+      "description": "自動放假 3 天，免請假",
+      "forLabor": true
+    },
+    {
+      "id": "christmas",
+      "name": "行憲紀念日連假",
+      "startDate": "2026-12-25",
+      "endDate": "2026-12-27",
+      "leaveDays": [],
+      "leaveCount": 0,
+      "totalDays": 3,
+      "cpValue": 0,
+      "description": "自動放假 3 天，免請假",
+      "forLabor": true
+    },
+    {
+      "id": "labor-extended",
+      "name": "⭐ 勞動節擴充版",
+      "startDate": "2026-04-30",
+      "endDate": "2026-05-05",
+      "leaveDays": [
+        "2026-04-30",
+        "2026-05-04",
+        "2026-05-05"
+      ],
+      "leaveCount": 3,
+      "totalDays": 6,
+      "cpValue": 2.0,
+      "description": "請 3 天休 6 天（僅勞工適用）",
+      "forLabor": true,
+      "laborOnly": true
+    },
+    {
+      "id": "dragon-extended",
+      "name": "⭐ 端午擴充版",
+      "startDate": "2026-06-18",
+      "endDate": "2026-06-21",
+      "leaveDays": [
+        "2026-06-18"
+      ],
+      "leaveCount": 1,
+      "totalDays": 4,
+      "cpValue": 4.0,
+      "description": "請 1 天休 4 天",
+      "forLabor": true
+    },
+    {
+      "id": "mid-autumn-extended",
+      "name": "⭐ 中秋擴充版",
+      "startDate": "2026-09-24",
+      "endDate": "2026-09-28",
+      "leaveDays": [
+        "2026-09-24"
+      ],
+      "leaveCount": 1,
+      "totalDays": 5,
+      "cpValue": 5.0,
+      "description": "請 1 天休 5 天",
+      "forLabor": true
+    }
+  ]
+}

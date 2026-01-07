@@ -57,6 +57,9 @@ async function initApp() {
             }
         }
 
+        // 初始化漢堡選單
+        initMobileMenu();
+
         console.log('🎉 應用程式初始化完成！');
 
     } catch (error) {
@@ -71,3 +74,54 @@ document.addEventListener('DOMContentLoaded', initApp);
 window.calendar = calendar;
 window.countdown = countdown;
 window.strategies = strategies;
+
+// 漢堡選單功能
+function initMobileMenu() {
+    const hamburgerBtn = document.getElementById('hamburgerBtn');
+    const closeMenuBtn = document.getElementById('closeMenuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const overlay = document.getElementById('overlay');
+    const mobileThemeToggle = document.getElementById('mobileThemeToggle');
+    const mobileLinks = document.querySelectorAll('.mobile-menu__link');
+
+    // 開啟選單
+    hamburgerBtn?.addEventListener('click', () => {
+        mobileMenu?.classList.add('mobile-menu--open');
+        overlay?.classList.add('overlay--visible');
+        document.body.style.overflow = 'hidden';
+    });
+
+    // 關閉選單
+    function closeMenu() {
+        mobileMenu?.classList.remove('mobile-menu--open');
+        overlay?.classList.remove('overlay--visible');
+        document.body.style.overflow = '';
+    }
+
+    closeMenuBtn?.addEventListener('click', closeMenu);
+    overlay?.addEventListener('click', closeMenu);
+
+    // 點擊連結後關閉選單
+    mobileLinks.forEach(link => {
+        link.addEventListener('click', closeMenu);
+    });
+
+    // 手機版主題切換
+    mobileThemeToggle?.addEventListener('click', () => {
+        utils.themeManager.toggle();
+        updateMobileThemeBtn();
+    });
+
+    // 初始化手機版主題按鈕狀態
+    updateMobileThemeBtn();
+}
+
+// 更新手機版主題按鈕文字
+function updateMobileThemeBtn() {
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    const mobileThemeIcon = document.getElementById('mobileThemeIcon');
+    const mobileThemeText = document.getElementById('mobileThemeText');
+
+    if (mobileThemeIcon) mobileThemeIcon.textContent = isDark ? '☀️' : '🌙';
+    if (mobileThemeText) mobileThemeText.textContent = isDark ? '淺色模式' : '深色模式';
+}

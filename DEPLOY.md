@@ -39,20 +39,20 @@ git push -u origin main
 ## 4. 設定自訂網域 (GitHub 端)
 
 1.  在同一個 **Pages** 設定頁面下方。
-2.  在 **Custom domain** 欄位輸入您的網域 (例如 `calendar.yourdomain.com`)。
+2.  在 **Custom domain** 欄位輸入您的網域：`TWCalendar.shibaalin.com`。
 3.  點擊 **Save**。
-    *   這會自動在您的程式碼根目錄產生一個 `CNAME` 檔案。
+    *   這會自動在您的程式碼根目錄產生一個 `CNAME` 檔案 (我們也已經幫您預先建立了)。
 4.  勾選 **Enforce HTTPS** (可能需要等待 DNS 生效後才能勾選)。
 
 ## 5. 設定 Cloudflare DNS
 
 1.  登入 [Cloudflare Dashboard](https://dash.cloudflare.com)。
-2.  選擇您的網域。
+2.  選擇您的網域 **`shibaalin.com`**。
 3.  點擊 **DNS** > **Records**。
 4.  新增一筆記錄：
     *   **Type**: `CNAME`
-    *   **Name**: 您想要的子網域 (例如 `calendar`) 或 `@` (如果是根網域)。
-    *   **Target**: `您的GitHub帳號.github.io` (例如 `tr0456.github.io`)。
+    *   **Name**: `TWCalendar` (對應到 `TWCalendar.shibaalin.com`)。
+    *   **Target**: `ccchang7956-collab.github.io`。
     *   **Proxy status**: 
         *   建議先設為 **DNS only** (灰色雲)，等待 GitHub 驗證並發放 HTTPS 憑證 (約 15-30 分鐘)。
         *   憑證生效後，再回來開啟 **Proxied** (橘色雲) 以獲得 Cloudflare 的 CDN 加速與防護。

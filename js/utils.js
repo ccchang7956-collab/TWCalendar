@@ -8,7 +8,7 @@ function formatDate(date, format = 'YYYY-MM-DD') {
   const year = d.getFullYear();
   const month = String(d.getMonth() + 1).padStart(2, '0');
   const day = String(d.getDate()).padStart(2, '0');
-  
+
   switch (format) {
     case 'YYYY-MM-DD':
       return `${year}-${month}-${day}`;
@@ -52,12 +52,12 @@ function getDateRange(startDate, endDate) {
   const dates = [];
   const current = new Date(startDate);
   const end = new Date(endDate);
-  
+
   while (current <= end) {
     dates.push(formatDate(current));
     current.setDate(current.getDate() + 1);
   }
-  
+
   return dates;
 }
 
@@ -85,7 +85,7 @@ function showToast(message, type = 'success') {
     <span>${message}</span>
   `;
   container.appendChild(toast);
-  
+
   setTimeout(() => {
     toast.style.opacity = '0';
     toast.style.transform = 'translateX(100%)';
@@ -119,28 +119,28 @@ const storage = {
 const themeManager = {
   init() {
     const savedTheme = storage.get('theme');
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    
+
+    // 預設為淺色模式，除非用戶之前選擇過深色模式
     if (savedTheme) {
       this.setTheme(savedTheme);
-    } else if (prefersDark) {
-      this.setTheme('dark');
+    } else {
+      this.setTheme('light');
     }
-    
+
     this.updateToggleButton();
   },
-  
+
   setTheme(theme) {
     document.documentElement.setAttribute('data-theme', theme);
     storage.set('theme', theme);
     this.updateToggleButton();
   },
-  
+
   toggle() {
     const current = document.documentElement.getAttribute('data-theme');
     this.setTheme(current === 'dark' ? 'light' : 'dark');
   },
-  
+
   updateToggleButton() {
     const btn = document.getElementById('themeToggle');
     const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
@@ -154,7 +154,7 @@ async function parseCSV(url) {
   const text = await response.text();
   const lines = text.trim().split('\n');
   const headers = lines[0].split(',');
-  
+
   return lines.slice(1).map(line => {
     const values = line.split(',');
     const obj = {};
@@ -179,13 +179,13 @@ async function loadHolidayData() {
 // 產生完整的行事曆資料
 async function generateCalendarData() {
   const csvData = await parseCSV('115年中華民國政府行政機關辦公日曆表.csv');
-  
+
   return csvData.map(row => {
     const dateStr = row['西元日期'];
     const year = dateStr.substring(0, 4);
     const month = dateStr.substring(4, 6);
     const day = dateStr.substring(6, 8);
-    
+
     return {
       date: `${year}-${month}-${day}`,
       dayOfWeek: row['星期'],

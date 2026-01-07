@@ -16,7 +16,8 @@ class CalendarComponent {
         this.strategies = [];
         this.leaveDays = new Set();
         this.showLeaveDays = false; // 預設不顯示建議請假日
-        this.viewMode = 'month'; // 'month' 或 'year'
+        // 桌面版預設年度檢視，手機版預設月份檢視
+        this.viewMode = window.innerWidth > 768 ? 'year' : 'month';
     }
 
     async init() {
@@ -35,8 +36,28 @@ class CalendarComponent {
             });
         }
 
+        // 初始化檢視模式（同步按鈕狀態和 DOM）
+        this.initViewMode();
+
         this.render();
         this.bindEvents();
+    }
+
+    initViewMode() {
+        const monthViewBtn = document.getElementById('monthViewBtn');
+        const yearViewBtn = document.getElementById('yearViewBtn');
+
+        if (this.viewMode === 'year') {
+            monthViewBtn?.classList.remove('view-toggle__btn--active');
+            yearViewBtn?.classList.add('view-toggle__btn--active');
+            this.monthViewEl?.classList.add('hidden');
+            this.yearViewEl?.classList.remove('hidden');
+        } else {
+            monthViewBtn?.classList.add('view-toggle__btn--active');
+            yearViewBtn?.classList.remove('view-toggle__btn--active');
+            this.monthViewEl?.classList.remove('hidden');
+            this.yearViewEl?.classList.add('hidden');
+        }
     }
 
     bindEvents() {

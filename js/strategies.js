@@ -33,14 +33,14 @@ class StrategiesManager {
     });
 
     sorted.forEach((strategy, index) => {
-      const card = this.createStrategyCard(strategy, index === 0);
+      const card = this.createStrategyCard(strategy);
       this.container.appendChild(card);
     });
   }
 
-  createStrategyCard(strategy, isFeatured) {
+  createStrategyCard(strategy) {
     const card = document.createElement('div');
-    card.className = `strategy-card${isFeatured ? ' strategy-card--featured' : ''}`;
+    card.className = 'strategy-card';
     card.setAttribute('data-strategy-id', strategy.id);
 
     // 計算 CP 值星星

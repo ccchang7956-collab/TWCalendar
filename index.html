@@ -11,14 +11,14 @@
   <meta name="keywords" content="115年辦公日曆表,民國115年行事曆,2026行事曆,國定假日,請假攻略,連假,春節假期,228和平紀念日,清明節,端午節,中秋節,國慶日,勞動節">
   <meta name="author" content="TWCalendar">
   <meta name="robots" content="index, follow">
-  <link rel="canonical" href="https://tw-calendar.example.com/">
+  <link rel="canonical" href="https://TWCalendar.shibaalin.com/">
 
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://tw-calendar.example.com/">
+  <meta property="og:url" content="https://TWCalendar.shibaalin.com/">
   <meta property="og:title" content="115年辦公日曆表｜民國115年行事曆、國定假日、請假攻略">
   <meta property="og:description" content="請4天休16天！民國115年（2026）最強請假攻略，國定假日查詢、互動式行事曆。">
-  <meta property="og:image" content="https://tw-calendar.example.com/assets/og-image.png">
+  <meta property="og:image" content="https://TWCalendar.shibaalin.com/assets/og-image.png">
   <meta property="og:locale" content="zh_TW">
   <meta property="og:site_name" content="115年辦公日曆表">
 
@@ -26,7 +26,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="115年辦公日曆表｜民國115年行事曆、國定假日、請假攻略">
   <meta name="twitter:description" content="請4天休16天！民國115年（2026）最強請假攻略，國定假日查詢、互動式行事曆。">
-  <meta name="twitter:image" content="https://tw-calendar.example.com/assets/og-image.png">
+  <meta name="twitter:image" content="https://TWCalendar.shibaalin.com/assets/og-image.png">
 
   <!-- PWA -->
   <meta name="theme-color" content="#3B82F6">
@@ -44,7 +44,7 @@
     "@type": "WebApplication",
     "name": "115年辦公日曆表",
     "description": "民國115年（2026年）政府行政機關辦公日曆表，完整國定假日一覽、請假攻略、互動式行事曆查詢。",
-    "url": "https://tw-calendar.example.com/",
+    "url": "https://TWCalendar.shibaalin.com/",
     "applicationCategory": "UtilitiesApplication",
     "operatingSystem": "All",
     "offers": {
@@ -111,18 +111,50 @@
     <div class="container header__container">
       <a href="#" class="header__logo">
         <img src="assets/icon-192.png" alt="Logo" class="header__logo-img"
-          style="width: 48px; height: 48px; border-radius: 50%;">
+          style="width: 48px; height: 48px; border-radius: 50%; vertical-align: middle;">
         <span>115年辦公日曆表</span>
       </a>
-      <nav class="header__nav">
+
+      <!-- 桌面版導覽 -->
+      <nav class="header__nav header__nav--desktop">
         <a href="#calendar" class="header__nav-link">行事曆</a>
         <a href="#strategies" class="header__nav-link">請假攻略</a>
       </nav>
-      <button class="theme-toggle" id="themeToggle" aria-label="切換深色模式">
+
+      <!-- 桌面版主題切換 -->
+      <button class="theme-toggle theme-toggle--desktop" id="themeToggle" aria-label="切換深色模式">
         🌙
+      </button>
+
+      <!-- 手機版漢堡選單按鈕 -->
+      <button class="hamburger" id="hamburgerBtn" aria-label="開啟選單">
+        <span class="hamburger__line"></span>
+        <span class="hamburger__line"></span>
+        <span class="hamburger__line"></span>
       </button>
     </div>
   </header>
+
+  <!-- 手機版側邊選單 -->
+  <div class="mobile-menu" id="mobileMenu">
+    <div class="mobile-menu__header">
+      <span class="mobile-menu__title">選單</span>
+      <button class="mobile-menu__close" id="closeMenuBtn" aria-label="關閉選單">✕</button>
+    </div>
+    <nav class="mobile-menu__nav">
+      <a href="#calendar" class="mobile-menu__link">📆 行事曆</a>
+      <a href="#strategies" class="mobile-menu__link">🎯 請假攻略</a>
+    </nav>
+    <div class="mobile-menu__footer">
+      <button class="mobile-menu__theme-btn" id="mobileThemeToggle">
+        <span id="mobileThemeIcon">🌙</span>
+        <span id="mobileThemeText">深色模式</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- 覆蓋層 -->
+  <div class="overlay" id="overlay"></div>
 
   <!-- Hero Section - 倒數計時器 -->
   <section class="hero">
@@ -297,14 +329,10 @@
   <footer class="footer">
     <div class="container">
       <p class="footer__text">
-        民國 115 年（2026）請假攻略與行事曆<br>
-        資料來源：中華民國政府行政機關辦公日曆表
+        民國 115 年（2026）辦公日曆表<br>
+        資料來源：<a href="https://data.gov.tw/dataset/14718" target="_blank"
+          style="color: inherit; text-decoration: underline;">政府資料開放平臺</a>
       </p>
-      <div class="footer__links">
-        <a href="#" class="footer__link">關於我們</a>
-        <a href="#" class="footer__link">隱私權政策</a>
-        <a href="https://github.com" class="footer__link" target="_blank">GitHub</a>
-      </div>
     </div>
   </footer>
 

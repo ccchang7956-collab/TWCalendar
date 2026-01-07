@@ -190,6 +190,7 @@ a:hover {
   justify-content: space-between;
   align-items: center;
   gap: var(--spacing-md);
+  position: relative;
 }
 
 .header__logo {
@@ -199,6 +200,7 @@ a:hover {
   font-size: 1.5rem;
   font-weight: 700;
   color: white;
+  z-index: 1;
 }
 
 .header__logo-icon {
@@ -206,6 +208,9 @@ a:hover {
 }
 
 .header__nav {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
   align-items: center;
   gap: var(--spacing-lg);
@@ -407,10 +412,15 @@ a:hover {
   color: white;
 }
 
-/* 手機版隱藏年度檢視按鈕 */
+/* 手機版縮小年度檢視按鈕 */
 @media (max-width: 768px) {
   .calendar-view-toggle {
-    display: none;
+    padding: 1px;
+  }
+
+  .view-toggle__btn {
+    padding: var(--spacing-xs) var(--spacing-sm);
+    font-size: 0.75rem;
   }
 }
 

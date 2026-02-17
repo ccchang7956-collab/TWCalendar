@@ -4,20 +4,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="format-detection" content="telephone=no">
 
-  <!-- Google Analytics 4 -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-2NHHHZPTKC"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
-    gtag('config', 'G-2NHHHZPTKC');
-  </script>
-
-  <!-- Fonts Preload -->
+  <!-- Fonts Preload (with fallback) -->
   <link rel="preload"
     href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Outfit:wght@400;600;700&display=swap"
-    as="style">
+    as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript>
+    <link rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Outfit:wght@400;600;700&display=swap">
+  </noscript>
 
   <!-- SEO Meta Tags -->
   <title>【2026行事曆】人事行政總處115年行事曆｜請假攻略、連假資訊</title>
@@ -29,20 +25,37 @@
   <meta name="google-site-verification" content="NqVWpaQNA2zQaG0iXjwamdwnSy0BX-GZ4Og4sWFKTGY" />
   <link rel="canonical" href="https://TWCalendar.shibaalin.com/">
 
+  <!-- Article Time -->
+  <meta property="article:published_time" content="2025-10-01T00:00:00+08:00">
+  <meta property="article:modified_time" content="2026-02-17T00:00:00+08:00">
+
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://TWCalendar.shibaalin.com/">
-  <meta property="og:title" content="115年辦公日曆表｜民國115年行事曆、國定假日、請假攻略">
-  <meta property="og:description" content="請4天休16天！民國115年（2026）最強請假攻略，國定假日查詢、互動式行事曆。">
+  <meta property="og:title" content="【2026行事曆】人事行政總處115年行事曆｜請假攻略、連假資訊">
+  <meta property="og:description" content="2026行事曆（民國115年）最完整懶人包！9大連假、請假攻略「請4休16」、國定假日查詢、互動式行事曆。">
   <meta property="og:image" content="https://TWCalendar.shibaalin.com/assets/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="2026行事曆（民國115年）9大連假與請假攻略一覽表">
+  <meta property="og:image:type" content="image/png">
   <meta property="og:locale" content="zh_TW">
   <meta property="og:site_name" content="115年辦公日曆表">
+  <meta property="og:updated_time" content="2026-02-17T00:00:00+08:00">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="115年辦公日曆表｜民國115年行事曆、國定假日、請假攻略">
-  <meta name="twitter:description" content="請4天休16天！民國115年（2026）最強請假攻略，國定假日查詢、互動式行事曆。">
+  <meta name="twitter:title" content="【2026行事曆】人事行政總處115年行事曆｜請假攻略、連假資訊">
+  <meta name="twitter:description" content="2026行事曆（民國115年）最完整懶人包！9大連假、請假攻略「請4休16」、國定假日查詢、互動式行事曆。">
   <meta name="twitter:image" content="https://TWCalendar.shibaalin.com/assets/og-image.png">
+
+  <!-- Dublin Core Metadata -->
+  <meta name="DC.Title" content="2026行事曆（民國115年）人事行政總處行事曆">
+  <meta name="DC.Subject" content="2026行事曆,115年行事曆,國定假日,請假攻略,連假,人事行政總處">
+  <meta name="DC.Description" content="2026行事曆（民國115年）最完整懶人包！9大連假、請假攻略、補班日查詢、互動式行事曆。">
+  <meta name="DC.Creator" content="TWCalendar">
+  <meta name="DC.Language" content="zh-TW">
+  <meta name="DC.Date" content="2026-02-17">
 
   <!-- PWA -->
   <meta name="theme-color" content="#3B82F6">
@@ -131,20 +144,35 @@
     {
       "@context": "https://schema.org",
       "@type": "Event",
+      "name": "2026 開國紀念日（元旦）",
+      "startDate": "2026-01-01",
+      "endDate": "2026-01-01",
+      "eventStatus": "https://schema.org/EventScheduled",
+      "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+      "location": { "@type": "Place", "name": "台灣", "address": { "@type": "PostalAddress", "addressCountry": "TW" } },
+      "description": "2026年元旦，若請1/2可連休4天。"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Event",
       "name": "2026 農曆春節",
       "startDate": "2026-02-14",
       "endDate": "2026-02-22",
       "eventStatus": "https://schema.org/EventScheduled",
       "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
-      "location": {
-        "@type": "Place",
-        "name": "台灣",
-        "address": {
-          "@type": "PostalAddress",
-          "addressCountry": "TW"
-        }
-      },
-      "description": "2026年農曆春節假期，共9天連假。"
+      "location": { "@type": "Place", "name": "台灣", "address": { "@type": "PostalAddress", "addressCountry": "TW" } },
+      "description": "2026年農曆春節假期，從2/14小年夜至2/22初五，共9天連假。搭配請假攻略可達16天。"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Event",
+      "name": "2026 和平紀念日（228）",
+      "startDate": "2026-02-27",
+      "endDate": "2026-03-01",
+      "eventStatus": "https://schema.org/EventScheduled",
+      "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+      "location": { "@type": "Place", "name": "台灣", "address": { "@type": "PostalAddress", "addressCountry": "TW" } },
+      "description": "2026年228和平紀念日，2/27補假，連休3天。"
     },
     {
       "@context": "https://schema.org",
@@ -154,15 +182,63 @@
       "endDate": "2026-04-06",
       "eventStatus": "https://schema.org/EventScheduled",
       "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
-      "location": {
-        "@type": "Place",
-        "name": "台灣",
-        "address": {
-          "@type": "PostalAddress",
-          "addressCountry": "TW"
-        }
-      },
-      "description": "2026年兒童節與民族掃墓節（清明節）連假，共4天。"
+      "location": { "@type": "Place", "name": "台灣", "address": { "@type": "PostalAddress", "addressCountry": "TW" } },
+      "description": "2026年兒童節與清明節連假，4/3及4/6補假，共4天。"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Event",
+      "name": "2026 勞動節",
+      "startDate": "2026-05-01",
+      "endDate": "2026-05-03",
+      "eventStatus": "https://schema.org/EventScheduled",
+      "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+      "location": { "@type": "Place", "name": "台灣", "address": { "@type": "PostalAddress", "addressCountry": "TW" } },
+      "description": "2026年勞動節，全國放假（115年新制），連休3天。"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Event",
+      "name": "2026 端午節",
+      "startDate": "2026-06-19",
+      "endDate": "2026-06-21",
+      "eventStatus": "https://schema.org/EventScheduled",
+      "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+      "location": { "@type": "Place", "name": "台灣", "address": { "@type": "PostalAddress", "addressCountry": "TW" } },
+      "description": "2026年端午節，6/19放假，連休3天。"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Event",
+      "name": "2026 中秋節",
+      "startDate": "2026-09-25",
+      "endDate": "2026-09-28",
+      "eventStatus": "https://schema.org/EventScheduled",
+      "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+      "location": { "@type": "Place", "name": "台灣", "address": { "@type": "PostalAddress", "addressCountry": "TW" } },
+      "description": "2026年中秋節連假，含教師節，共4天。請9/24再多休1天。"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Event",
+      "name": "2026 國慶日",
+      "startDate": "2026-10-09",
+      "endDate": "2026-10-11",
+      "eventStatus": "https://schema.org/EventScheduled",
+      "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+      "location": { "@type": "Place", "name": "台灣", "address": { "@type": "PostalAddress", "addressCountry": "TW" } },
+      "description": "2026年國慶日，10/9補假，連休3天。"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Event",
+      "name": "2026 行憲紀念日",
+      "startDate": "2026-12-25",
+      "endDate": "2026-12-27",
+      "eventStatus": "https://schema.org/EventScheduled",
+      "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+      "location": { "@type": "Place", "name": "台灣", "address": { "@type": "PostalAddress", "addressCountry": "TW" } },
+      "description": "2026年行憲紀念日，12/25放假，連休3天。"
     }
   ]
   </script>
@@ -233,23 +309,92 @@
   }
   </script>
 
+  <!-- WebSite Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "115年辦公日曆表",
+    "alternateName": ["2026行事曆", "TWCalendar", "民國115年行事曆"],
+    "url": "https://TWCalendar.shibaalin.com/",
+    "inLanguage": "zh-TW",
+    "description": "2026行事曆（民國115年）最完整懶人包！包含人事行政總處行事曆、9大連假資訊、補班日查詢、請假攻略。",
+    "publisher": {
+      "@type": "Organization",
+      "name": "TWCalendar"
+    }
+  }
+  </script>
+
+  <!-- ItemList Schema (攻略排行) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "2026 請假攻略 CP 值排行榜",
+    "description": "依 CP 值排序的 2026 年請假攻略，教你用最少的假換最長的連假。",
+    "numberOfItems": 4,
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "中秋擴充版：請1天休5天（CP值5.0）",
+        "url": "https://TWCalendar.shibaalin.com/#strategies"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "春節+228超長假：請4天休16天（CP值4.0）",
+        "url": "https://TWCalendar.shibaalin.com/#strategies"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "端午擴充版：請1天休4天（CP值4.0）",
+        "url": "https://TWCalendar.shibaalin.com/#strategies"
+      },
+      {
+        "@type": "ListItem",
+        "position": 4,
+        "name": "勞動節擴充版：請3天休6天（CP值2.0）",
+        "url": "https://TWCalendar.shibaalin.com/#strategies"
+      }
+    ]
+  }
+  </script>
+
+  <!-- Speakable Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "2026行事曆與請假攻略",
+    "speakable": {
+      "@type": "SpeakableSpecification",
+      "cssSelector": [".hero__title", ".hero__subtitle", ".seo-content__title", ".seo-content__body p", ".seo-content__body li"]
+    },
+    "url": "https://TWCalendar.shibaalin.com/"
+  }
+  </script>
+
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Outfit:wght@400;600;700&display=swap"
-    rel="stylesheet">
 
   <!-- Styles -->
   <link rel="stylesheet" href="css/index.css">
 </head>
 
 <body>
+  <!-- Skip to content -->
+  <a href="#calendar" class="sr-only"
+    style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;">跳至主要內容</a>
+
   <!-- Header -->
   <header class="header">
     <div class="container header__container">
       <a href="#" class="header__logo">
-        <img src="assets/icon-192.png" alt="Logo" class="header__logo-img"
+        <img src="assets/icon-192.png" alt="115年辦公日曆表 - 2026行事曆查詢工具" class="header__logo-img"
           style="width: 48px; height: 48px; border-radius: 50%; vertical-align: middle; background-color: white;">
         <span>115年辦公日曆表</span>
       </a>
@@ -295,269 +440,353 @@
   <!-- 覆蓋層 -->
   <div class="overlay" id="overlay"></div>
 
-  <!-- Hero Section - 倒數計時器 -->
-  <section class="hero">
-    <div class="container hero__content">
-      <span class="hero__badge">🎉 距離下一個連假</span>
-      <h1 class="hero__title" id="nextHolidayName">載入中...</h1>
-      <p class="hero__subtitle" id="nextHolidayDates"></p>
+  <main>
+    <!-- Hero Section - 倒數計時器 -->
+    <section class="hero">
+      <div class="container hero__content">
+        <span class="hero__badge">🎉 距離下一個連假</span>
+        <h1 class="hero__title" id="nextHolidayName">載入中...</h1>
+        <p class="hero__subtitle" id="nextHolidayDates"></p>
 
-      <div class="countdown" id="countdown">
-        <div class="countdown__item">
-          <span class="countdown__number" id="countdownDays">--</span>
-          <span class="countdown__label">天</span>
-        </div>
-        <div class="countdown__item">
-          <span class="countdown__number" id="countdownHours">--</span>
-          <span class="countdown__label">小時</span>
-        </div>
-        <div class="countdown__item">
-          <span class="countdown__number" id="countdownMinutes">--</span>
-          <span class="countdown__label">分鐘</span>
-        </div>
-        <div class="countdown__item">
-          <span class="countdown__number" id="countdownSeconds">--</span>
-          <span class="countdown__label">秒</span>
-        </div>
-      </div>
-
-      <p class="countdown__holiday-info" id="holidayInfo"></p>
-    </div>
-  </section>
-
-  <!-- Calendar Section -->
-  <section class="calendar-section section" id="calendar">
-    <div class="container">
-      <div class="calendar-header">
-        <h2>📆 <span id="calendarTitle">2026 年 1 月</span></h2>
-        <div class="calendar-controls">
-          <div class="calendar-view-toggle" id="viewToggle">
-            <button class="view-toggle__btn view-toggle__btn--active" id="monthViewBtn" aria-label="月份檢視">月</button>
-            <button class="view-toggle__btn" id="yearViewBtn" aria-label="年度檢視">年</button>
+        <div class="countdown" id="countdown">
+          <div class="countdown__item">
+            <span class="countdown__number" id="countdownDays">--</span>
+            <span class="countdown__label">天</span>
           </div>
-          <div class="calendar-nav">
-            <button class="calendar-nav__btn" id="prevMonth" aria-label="上個月">◀</button>
-            <button class="calendar-nav__btn" id="todayBtn" aria-label="回到今天">今</button>
-            <button class="calendar-nav__btn" id="nextMonth" aria-label="下個月">▶</button>
+          <div class="countdown__item">
+            <span class="countdown__number" id="countdownHours">--</span>
+            <span class="countdown__label">小時</span>
+          </div>
+          <div class="countdown__item">
+            <span class="countdown__number" id="countdownMinutes">--</span>
+            <span class="countdown__label">分鐘</span>
+          </div>
+          <div class="countdown__item">
+            <span class="countdown__number" id="countdownSeconds">--</span>
+            <span class="countdown__label">秒</span>
           </div>
         </div>
+
+        <p class="countdown__holiday-info" id="holidayInfo"></p>
       </div>
+    </section>
 
-      <!-- 月份檢視 -->
-      <div id="monthView">
-        <div class="calendar-grid" id="calendarGrid">
-          <div class="calendar-grid__header">日</div>
-          <div class="calendar-grid__header">一</div>
-          <div class="calendar-grid__header">二</div>
-          <div class="calendar-grid__header">三</div>
-          <div class="calendar-grid__header">四</div>
-          <div class="calendar-grid__header">五</div>
-          <div class="calendar-grid__header">六</div>
-          <!-- Calendar days will be generated by JS -->
-        </div>
-      </div>
-
-      <!-- 年度檢視 -->
-      <div id="yearView" class="year-view hidden">
-        <!-- 12 months will be generated by JS -->
-      </div>
-
-      <div class="calendar-legend mt-lg" style="display: flex; flex-direction: column; gap: 0.75rem;">
-        <div style="display: flex; gap: 1.5rem; flex-wrap: wrap; justify-content: center; align-items: center;">
-          <span style="display: flex; align-items: center; gap: 0.5rem;">
-            <span style="width: 16px; height: 16px; background: #FECACA; border-radius: 4px;"></span> 假日
-          </span>
-          <span style="display: flex; align-items: center; gap: 0.5rem;">
-            <span style="width: 16px; height: 16px; background: #DBEAFE; border-radius: 4px;"></span> 今天
-          </span>
-        </div>
-        <div style="display: flex; justify-content: flex-end;">
-          <label
-            style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; padding: 0.25rem 0.75rem; background: var(--color-bg-card); border: 1px solid var(--color-border); border-radius: 9999px;">
-            <input type="checkbox" id="showLeaveDays" style="cursor: pointer;">
-            <span
-              style="width: 16px; height: 16px; background: #FEF9C3; border: 2px dashed #F97316; border-radius: 4px;"></span>
-            <span>顯示建議請假日</span>
-          </label>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Strategies Section -->
-  <section class="strategies-section section" id="strategies">
-    <div class="container">
-      <h2 class="mb-lg text-center">🎯 2026 請假攻略</h2>
-      <p class="text-center mb-lg" style="color: var(--color-text-secondary);">
-        聰明請假，讓你的假期效益最大化！
-      </p>
-
-      <div id="strategiesContainer" class="stagger">
-        <!-- Strategy cards will be generated by JS -->
-      </div>
-    </div>
-  </section>
-
-  <!-- Download Section (暫時隱藏) -->
-  <section class="download-section section hidden" id="download">
-    <div class="container">
-      <h2 class="mb-lg text-center">📥 下載行事曆</h2>
-      <p class="text-center mb-lg" style="color: var(--color-text-secondary);">
-        多種格式，滿足你的各種需求
-      </p>
-
-      <div class="download-grid">
-        <div class="download-card" onclick="downloadExcel()">
-          <div class="download-card__icon">📊</div>
-          <h3 class="download-card__title">Excel</h3>
-          <p class="download-card__description">完整年度日曆表，適合公司請假規劃</p>
-          <button class="download-card__btn">
-            <span>下載 .xlsx</span>
-          </button>
+    <!-- Calendar Section -->
+    <section class="calendar-section section" id="calendar">
+      <div class="container">
+        <div class="calendar-header">
+          <h2>📆 <span id="calendarTitle">2026 年 1 月</span></h2>
+          <div class="calendar-controls">
+            <div class="calendar-view-toggle" id="viewToggle">
+              <button class="view-toggle__btn view-toggle__btn--active" id="monthViewBtn" aria-label="月份檢視">月</button>
+              <button class="view-toggle__btn" id="yearViewBtn" aria-label="年度檢視">年</button>
+            </div>
+            <div class="calendar-nav">
+              <button class="calendar-nav__btn" id="prevMonth" aria-label="上個月">◀</button>
+              <button class="calendar-nav__btn" id="todayBtn" aria-label="回到今天">今</button>
+              <button class="calendar-nav__btn" id="nextMonth" aria-label="下個月">▶</button>
+            </div>
+          </div>
         </div>
 
-        <div class="download-card" onclick="downloadPDF()">
-          <div class="download-card__icon">📄</div>
-          <h3 class="download-card__title">PDF</h3>
-          <p class="download-card__description">精美年曆海報，可列印張貼</p>
-          <button class="download-card__btn">
-            <span>下載 .pdf</span>
-          </button>
+        <!-- 月份檢視 -->
+        <div id="monthView">
+          <div class="calendar-grid" id="calendarGrid">
+            <div class="calendar-grid__header">日</div>
+            <div class="calendar-grid__header">一</div>
+            <div class="calendar-grid__header">二</div>
+            <div class="calendar-grid__header">三</div>
+            <div class="calendar-grid__header">四</div>
+            <div class="calendar-grid__header">五</div>
+            <div class="calendar-grid__header">六</div>
+            <!-- Calendar days will be generated by JS -->
+          </div>
         </div>
 
-        <div class="download-card" onclick="downloadICal()">
-          <div class="download-card__icon">📱</div>
-          <h3 class="download-card__title">iCal</h3>
-          <p class="download-card__description">匯入 iPhone / Google 日曆</p>
-          <button class="download-card__btn">
-            <span>下載 .ics</span>
-          </button>
+        <!-- 年度檢視 -->
+        <div id="yearView" class="year-view hidden">
+          <!-- 12 months will be generated by JS -->
         </div>
 
-        <div class="download-card" onclick="downloadPNG()">
-          <div class="download-card__icon">🖼️</div>
-          <h3 class="download-card__title">圖片</h3>
-          <p class="download-card__description">年度行事曆圖檔，社群分享</p>
-          <button class="download-card__btn">
-            <span>下載 .png</span>
-          </button>
+        <div class="calendar-legend mt-lg" style="display: flex; flex-direction: column; gap: 0.75rem;">
+          <div style="display: flex; gap: 1.5rem; flex-wrap: wrap; justify-content: center; align-items: center;">
+            <span style="display: flex; align-items: center; gap: 0.5rem;">
+              <span style="width: 16px; height: 16px; background: #FECACA; border-radius: 4px;"></span> 假日
+            </span>
+            <span style="display: flex; align-items: center; gap: 0.5rem;">
+              <span style="width: 16px; height: 16px; background: #DBEAFE; border-radius: 4px;"></span> 今天
+            </span>
+          </div>
+          <div style="display: flex; justify-content: flex-end;">
+            <label
+              style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; padding: 0.25rem 0.75rem; background: var(--color-bg-card); border: 1px solid var(--color-border); border-radius: 9999px;">
+              <input type="checkbox" id="showLeaveDays" style="cursor: pointer;">
+              <span
+                style="width: 16px; height: 16px; background: #FEF9C3; border: 2px dashed #F97316; border-radius: 4px;"></span>
+              <span>顯示建議請假日</span>
+            </label>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Share Section -->
-  <section class="share-section">
-    <div class="container">
-      <h3 class="mb-md">📢 分享給朋友</h3>
-      <div class="share-buttons">
-        <button class="share-btn share-btn--line" onclick="shareToLine()">
-          <span>LINE</span>
-        </button>
-        <button class="share-btn share-btn--fb" onclick="shareToFacebook()">
-          <span>Facebook</span>
-        </button>
-        <button class="share-btn share-btn--copy" onclick="copyLink()">
-          <span>複製連結</span>
-        </button>
-      </div>
-    </div>
-  </section>
-
-  <!-- SEO Content Section -->
-  <article class="seo-content section">
-    <div class="container">
-      <h2 class="seo-content__title">2026年（民國115年）行事曆懶人包</h2>
-      <div class="seo-content__body">
-        <p>人事行政總處已公布中華民國115年（西元2026年）政府行政機關辦公日曆表。2026年總共有
-          <strong>9個連假</strong>，其中包含長達9天的農曆春節假期。只要善用請假攻略，甚至可以達成「請4休16」的驚人長假！
+    <!-- Strategies Section -->
+    <section class="strategies-section section" id="strategies">
+      <div class="container">
+        <h2 class="mb-lg text-center">🎯 2026 請假攻略</h2>
+        <p class="text-center mb-lg" style="color: var(--color-text-secondary);">
+          聰明請假，讓你的假期效益最大化！
         </p>
 
-        <h3>📅 2026年連假與國定假日一覽表</h3>
-        <div class="table-responsive">
-          <table class="seo-table">
-            <thead>
-              <tr>
-                <th>節日 / 連假名稱</th>
-                <th>放假日期</th>
-                <th>天數</th>
-                <th>說明</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>開國紀念日 (元旦)</td>
-                <td>1/1 (四)</td>
-                <td>1天</td>
-                <td>若請 1/2 (五)，可連休 4 天</td>
-              </tr>
-              <tr>
-                <td>農曆春節</td>
-                <td>2/14 (六) - 2/22 (日)</td>
-                <td>9天</td>
-                <td>除夕前一日為 2/15 (日)</td>
-              </tr>
-              <tr>
-                <td>和平紀念日 (228)</td>
-                <td>2/27 (五) - 3/1 (日)</td>
-                <td>3天</td>
-                <td>2/27 (五) 補假</td>
-              </tr>
-              <tr>
-                <td>兒童節 & 民族掃墓節</td>
-                <td>4/3 (五) - 4/6 (一)</td>
-                <td>4天</td>
-                <td>4/3 (五) 補假，4/6 (一) 補假</td>
-              </tr>
-              <tr>
-                <td>勞動節</td>
-                <td>5/1 (五) - 5/3 (日)</td>
-                <td>3天</td>
-                <td>勞工專屬假期</td>
-              </tr>
-              <tr>
-                <td>端午節</td>
-                <td>6/19 (五) - 6/21 (日)</td>
-                <td>3天</td>
-                <td>6/19 (五) 放假</td>
-              </tr>
-              <tr>
-                <td>中秋節</td>
-                <td>9/25 (五) - 9/27 (日)</td>
-                <td>3天</td>
-                <td>9/25 (五) 放假</td>
-              </tr>
-              <tr>
-                <td>國慶日</td>
-                <td>10/9 (五) - 10/11 (日)</td>
-                <td>3天</td>
-                <td>10/9 (五) 補假</td>
-              </tr>
-            </tbody>
-          </table>
+        <div id="strategiesContainer" class="stagger">
+          <!-- Strategy cards will be generated by JS -->
         </div>
-
-        <h3>💡 2026 請假攻略重點</h3>
-        <ul>
-          <li><strong>春節連假 (2月)</strong>：原放9天。若請 <strong>2/23~2/26 (4天)</strong>，可串聯228連假，達到 <strong>請4休16</strong>
-            的超長假期 (2/14~3/1)。</li>
-          <li><strong>清明連假 (4月)</strong>：只需請 <strong>3/30~4/2 (4天)</strong>，可連休9天 (3/28~4/6)。</li>
-          <li><strong>雙十連假 (10月)</strong>：請 <strong>10/5~10/8 (4天)</strong>，可連休9天 (10/3~10/11)。</li>
-        </ul>
-
-        <h3>📝 2026 補班日資訊</h3>
-        <p>根據行政院人事行政總處最新機制，2026年補班日將大幅減少，僅在「除夕前一日」及「兒童節及民族掃墓節」逢週二或週四時才需調整。因此2026年民眾將更能自主安排假期，減少補班帶來的疲勞感。</p>
       </div>
-    </div>
-  </article>
+    </section>
+
+    <!-- Download Section (暫時隱藏) -->
+    <section class="download-section section hidden" id="download">
+      <div class="container">
+        <h2 class="mb-lg text-center">📥 下載行事曆</h2>
+        <p class="text-center mb-lg" style="color: var(--color-text-secondary);">
+          多種格式，滿足你的各種需求
+        </p>
+
+        <div class="download-grid">
+          <div class="download-card" onclick="downloadExcel()">
+            <div class="download-card__icon">📊</div>
+            <h3 class="download-card__title">Excel</h3>
+            <p class="download-card__description">完整年度日曆表，適合公司請假規劃</p>
+            <button class="download-card__btn">
+              <span>下載 .xlsx</span>
+            </button>
+          </div>
+
+          <div class="download-card" onclick="downloadPDF()">
+            <div class="download-card__icon">📄</div>
+            <h3 class="download-card__title">PDF</h3>
+            <p class="download-card__description">精美年曆海報，可列印張貼</p>
+            <button class="download-card__btn">
+              <span>下載 .pdf</span>
+            </button>
+          </div>
+
+          <div class="download-card" onclick="downloadICal()">
+            <div class="download-card__icon">📱</div>
+            <h3 class="download-card__title">iCal</h3>
+            <p class="download-card__description">匯入 iPhone / Google 日曆</p>
+            <button class="download-card__btn">
+              <span>下載 .ics</span>
+            </button>
+          </div>
+
+          <div class="download-card" onclick="downloadPNG()">
+            <div class="download-card__icon">🖼️</div>
+            <h3 class="download-card__title">圖片</h3>
+            <p class="download-card__description">年度行事曆圖檔，社群分享</p>
+            <button class="download-card__btn">
+              <span>下載 .png</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Share Section -->
+    <section class="share-section">
+      <div class="container">
+        <h3 class="mb-md">📢 分享給朋友</h3>
+        <div class="share-buttons">
+          <button class="share-btn share-btn--line" onclick="shareToLine()">
+            <span>LINE</span>
+          </button>
+          <button class="share-btn share-btn--fb" onclick="shareToFacebook()">
+            <span>Facebook</span>
+          </button>
+          <button class="share-btn share-btn--copy" onclick="copyLink()">
+            <span>複製連結</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- SEO Content Section -->
+    <article class="seo-content section">
+      <div class="container">
+        <h2 class="seo-content__title">2026年（民國115年）行事曆完整攻略</h2>
+        <div class="seo-content__body">
+          <p>行政院人事行政總處已公布中華民國115年（西元2026年）政府行政機關辦公日曆表。2026年總共有
+            <strong>9個連假</strong>，其中包含長達9天的農曆春節假期。只要善用請假攻略，甚至可以達成「請4休16」的驚人長假！本頁面提供完整的國定假日一覽、請假攻略 CP
+            值排行、補班日整理，以及各連假出遊建議。
+          </p>
+
+          <h3>📅 2026年連假與國定假日一覽表</h3>
+          <div class="table-responsive">
+            <table class="seo-table">
+              <caption>2026年（民國115年）國定假日與連假一覽表</caption>
+              <thead>
+                <tr>
+                  <th>節日 / 連假名稱</th>
+                  <th>放假日期</th>
+                  <th>天數</th>
+                  <th>說明</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>開國紀念日 (元旦)</td>
+                  <td>1/1 (四)</td>
+                  <td>1天</td>
+                  <td>若請 1/2 (五)，可連休 4 天</td>
+                </tr>
+                <tr>
+                  <td>農曆春節</td>
+                  <td>2/14 (六) - 2/22 (日)</td>
+                  <td>9天</td>
+                  <td>小年夜至初五，含補假</td>
+                </tr>
+                <tr>
+                  <td>和平紀念日 (228)</td>
+                  <td>2/27 (五) - 3/1 (日)</td>
+                  <td>3天</td>
+                  <td>2/27 (五) 補假</td>
+                </tr>
+                <tr>
+                  <td>兒童節 &amp; 清明節</td>
+                  <td>4/3 (五) - 4/6 (一)</td>
+                  <td>4天</td>
+                  <td>4/3 補假，4/6 補假</td>
+                </tr>
+                <tr>
+                  <td>勞動節</td>
+                  <td>5/1 (五) - 5/3 (日)</td>
+                  <td>3天</td>
+                  <td>全國放假（115年新制）</td>
+                </tr>
+                <tr>
+                  <td>端午節</td>
+                  <td>6/19 (五) - 6/21 (日)</td>
+                  <td>3天</td>
+                  <td>6/19 (五) 放假</td>
+                </tr>
+                <tr>
+                  <td>中秋節</td>
+                  <td>9/25 (五) - 9/28 (日)</td>
+                  <td>4天</td>
+                  <td>含教師節 9/28</td>
+                </tr>
+                <tr>
+                  <td>國慶日</td>
+                  <td>10/9 (五) - 10/11 (日)</td>
+                  <td>3天</td>
+                  <td>10/9 (五) 補假</td>
+                </tr>
+                <tr>
+                  <td>行憲紀念日</td>
+                  <td>12/25 (五) - 12/27 (日)</td>
+                  <td>3天</td>
+                  <td>12/25 (五) 放假</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3>💡 2026 請假攻略 CP 值排行</h3>
+          <p>CP 值計算公式：<strong>總休假天數 ÷ 請假天數</strong>。CP 值越高代表投資報酬率越好。以下為 2026 年 CP 值最高的請假策略：</p>
+          <ol>
+            <li><strong>🏆 中秋擴充版（CP 值 5.0）</strong>：請 <strong>9/24（四）1 天</strong>，即可從 9/24 連休至 9/28，共 <strong>5
+                天</strong>。CP 值最高！</li>
+            <li><strong>🏆 春節 + 228 超長假（CP 值 4.0）</strong>：請 <strong>2/23～2/26（4 天）</strong>，串聯春節與 228 連假，從 2/14 一路放到
+              3/1，共 <strong>16 天</strong>。最適合海外長途旅行！</li>
+            <li><strong>🏆 端午擴充版（CP 值 4.0）</strong>：請 <strong>6/18（四）1 天</strong>，可從 6/18 連休至 6/21，共 <strong>4
+                天</strong>。</li>
+            <li><strong>勞動節擴充版（CP 值 2.0）</strong>：請 <strong>4/30、5/4、5/5（3 天）</strong>，可連休 <strong>6 天</strong>（全國適用）。
+            </li>
+          </ol>
+
+          <h3>📝 2026 補班日資訊</h3>
+          <p>根據行政院人事行政總處最新機制，2026年補班日將大幅減少。依據新制規定，僅在「除夕前一日」及「兒童節及民族掃墓節」逢週二或週四時才需調整放假及補班。以下為目前確定的補班資訊：</p>
+          <ul>
+            <li>2026 年無需補班日（依據最新公告）</li>
+            <li>民眾可更自由地安排假期，減少以往頻繁補班帶來的疲勞感</li>
+          </ul>
+
+          <h3>🛫 2026 各連假出遊建議</h3>
+          <ul>
+            <li><strong>春節 9 天／16 天</strong>：推薦日本、韓國、東南亞等中長程旅遊。16 天版本可考慮歐洲深度遊。</li>
+            <li><strong>清明 4 天</strong>：適合國內小旅行，如花東、墾丁、澎湖（季節剛好）。</li>
+            <li><strong>端午 3～4 天</strong>：離島（澎湖、綠島、蘭嶼）正值旺季前，價格相對親民。</li>
+            <li><strong>中秋 4～5 天</strong>：日本秋季賞楓、韓國首爾等鄰近國家短程旅遊首選。</li>
+            <li><strong>國慶 3 天</strong>：國內溫泉季開始，適合北投、礁溪、谷關等溫泉小旅行。</li>
+          </ul>
+
+          <h3>⚖️ 請假注意事項（勞基法相關）</h3>
+          <ul>
+            <li>依《勞動基準法》第 38 條，勞工工作滿 6 個月即有 <strong>3 天特休假</strong>，滿 1 年有 <strong>7 天</strong>，滿 2 年有 <strong>10
+                天</strong>。</li>
+            <li>國定假日出勤，雇主應加倍發給工資（即「雙倍薪」）。</li>
+            <li>勞動節（5/1）為全國勞工國定假日，公務員不放假。115 年起適用新制，全國放假。</li>
+            <li>排班制勞工若遇國定假日需出勤，應另行補假或加發工資。</li>
+            <li>建議提早與公司確認年度特休額度，搭配連假使用效益最大。</li>
+          </ul>
+
+          <h3>📊 2026 vs 2025 連假比較</h3>
+          <p>相較於 2025 年，2026 年的連假分佈更為平均：</p>
+          <ul>
+            <li>春節仍維持 9 天長假，且請假攻略可達 <strong>16 天</strong>（2025 年最長僅 11 天）</li>
+            <li>2026 年補班日大幅減少甚至歸零，上班族負擔明顯降低</li>
+            <li>勞動節 115 年新制改為全國放假，惠及所有勞工</li>
+            <li>中秋節剛好與教師節（9/28）相鄰，自動形成 4 天連假</li>
+          </ul>
+
+          <h3>📜 紀念日及節日實施條例（摘錄）</h3>
+          <details>
+            <summary style="cursor: pointer; font-weight: 600; color: var(--primary);">點擊展開完整法條內容</summary>
+            <div
+              style="margin-top: 1rem; padding: 1rem; background: var(--bg-secondary, #f8f9fa); border-radius: 8px; font-size: 0.9rem; line-height: 1.8;">
+              <p><strong>第四條</strong><br>
+                下列紀念日均放假一日，其餘均不放假：<br>
+                一、中華民國開國紀念日。<br>
+                二、和平紀念日。<br>
+                三、孔子誕辰紀念日。<br>
+                四、國慶日。<br>
+                五、臺灣光復暨金門古寧頭大捷紀念日。<br>
+                六、行憲紀念日。</p>
+              <p><strong>第六條</strong><br>
+                前條所列節日之放假依下列規定辦理：<br>
+                一、除夕及春節：自農曆十二月末日之前一日至翌年一月三日，放假五日。<br>
+                二、兒童節、清明節、勞動節、端午節、教師節及中秋節：均放假一日。<br>
+                三、原住民族歲時祭儀：由原住民依其族別歲時祭儀擇定三日放假。<br>
+                兒童節與清明節同一日時，於前一日放假。但逢星期四時，於後一日放假。<br>
+                第一項以外之節日，均不放假。</p>
+              <p><strong>第八條</strong><br>
+                紀念日及節日之放假日逢例假日者，應予補假。調整放假及補行上班日期，除其他法令另有規定者外，由目的事業主管機關調移並公告之。</p>
+              <h4 style="margin-top: 1rem;">政府機關配合紀念日與節日補假及調整放假處理要點（摘錄）</h4>
+              <p style="font-size: 0.85rem; color: #666;">114年6月13日行政院院授人培字第1143024631號函修正</p>
+              <p><strong>第三點</strong><br>
+                紀念日及節日之放假日，逢星期六者於前一個上班日補假，逢星期日者於次一個上班日補假。但除夕及春節放假日逢例假日者，得於前一個或次一個上班日補假。</p>
+              <p><strong>第五點</strong><br>
+                政府行政機關辦公日曆表由行政院人事行政總處依本要點規定擬訂，簽陳行政院核定，並於每年六月三十日前，公告次年之辦公日曆表。但有特殊情形時，得延後於八月三十一日前公告。</p>
+            </div>
+          </details>
+        </div>
+      </div>
+    </article>
+
+  </main>
 
   <!-- Footer -->
   <footer class="footer">
     <div class="container">
       <p class="footer__text">
         民國 115 年（2026）辦公日曆表<br>
-        資料來源：<a href="https://data.gov.tw/dataset/14718" target="_blank"
+        資料來源：<a href="https://data.gov.tw/dataset/14718" target="_blank" rel="noopener noreferrer"
           style="color: inherit; text-decoration: underline;">政府資料開放平臺</a>
+        ｜<a href="https://www.dgpa.gov.tw/" target="_blank" rel="noopener noreferrer"
+          style="color: inherit; text-decoration: underline;">行政院人事行政總處</a>
+      </p>
+      <p class="footer__text" style="margin-top: 0.5rem; font-size: 0.75rem;">
+        本站資料僅供參考，正式資訊請以行政院人事行政總處公告為準。
       </p>
     </div>
   </footer>
@@ -566,8 +795,24 @@
   <div class="toast-container" id="toastContainer"></div>
 
   <!-- Scripts -->
-  <!-- Scripts -->
   <script type="module" src="js/app.js"></script>
+
+  <!-- Google Analytics 4 (deferred for better LCP) -->
+  <script>
+    window.requestIdleCallback = window.requestIdleCallback || function (cb) { setTimeout(cb, 2000); };
+    requestIdleCallback(() => {
+      setTimeout(() => {
+        const s = document.createElement('script');
+        s.src = 'https://www.googletagmanager.com/gtag/js?id=G-2NHHHZPTKC';
+        s.async = true;
+        document.body.appendChild(s);
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-2NHHHZPTKC');
+      }, 500);
+    });
+  </script>
 </body>
 
 </html>

@@ -1,3 +1,26 @@
 User-agent: *
 Allow: /
+
+# AI 爬蟲 — 明確允許
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
 Sitemap: https://TWCalendar.shibaalin.com/sitemap.xml

@@ -2,7 +2,7 @@
  * Service Worker for PWA
  */
 
-const CACHE_NAME = 'tw-calendar-v1';
+const CACHE_NAME = 'tw-calendar-v2026-0217';
 const urlsToCache = [
     '/',
     '/index.html',

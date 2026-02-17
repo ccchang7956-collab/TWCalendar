@@ -1307,3 +1307,96 @@ a:hover {
   opacity: 1;
   visibility: visible;
 }
+/* =============================================
+   SEO Content Section
+   ============================================= */
+.seo-content {
+  background: var(--color-bg);
+  padding: var(--spacing-2xl) 0;
+  border-top: 1px solid var(--color-border);
+}
+
+.seo-content__title {
+  text-align: center;
+  margin-bottom: var(--spacing-lg);
+  font-size: 1.75rem;
+  color: var(--color-primary-dark);
+}
+
+[data-theme="dark"] .seo-content__title {
+  color: var(--color-primary-light);
+}
+
+.seo-content__body {
+  max-width: 800px;
+  margin: 0 auto;
+  color: var(--color-text);
+  line-height: 1.8;
+}
+
+.seo-content__body h3 {
+  margin-top: var(--spacing-xl);
+  margin-bottom: var(--spacing-md);
+  font-size: 1.25rem;
+  color: var(--color-text);
+  border-left: 4px solid var(--color-primary);
+  padding-left: var(--spacing-sm);
+}
+
+.seo-content__body p,
+.seo-content__body ul {
+  margin-bottom: var(--spacing-md);
+}
+
+.seo-content__body ul {
+  padding-left: var(--spacing-xl);
+}
+
+.seo-content__body li {
+  margin-bottom: var(--spacing-xs);
+}
+
+/* SEO Table */
+.table-responsive {
+  overflow-x: auto;
+  margin-bottom: var(--spacing-lg);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.seo-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--color-bg-card);
+  min-width: 600px; /* Ensure table doesn't get too squashed on mobile */
+}
+
+.seo-table th,
+.seo-table td {
+  padding: var(--spacing-md);
+  text-align: left;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.seo-table th {
+  background: var(--color-primary);
+  color: white;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.seo-table td {
+  color: var(--color-text);
+}
+
+.seo-table tr:last-child td {
+  border-bottom: none;
+}
+
+.seo-table tr:hover td {
+  background: var(--color-bg-hover);
+}
+
+[data-theme="dark"] .seo-table th {
+  background: var(--color-primary-dark);
+}

@@ -1,9 +1,11 @@
 /**
  * 匯出功能模組
  */
+import { CONFIG } from './config.js';
+import * as utils from './utils.js';
 
 // Excel 匯出
-async function downloadExcel() {
+export async function downloadExcel() {
     utils.showToast('正在產生 Excel 檔案...');
 
     try {
@@ -12,7 +14,7 @@ async function downloadExcel() {
             await loadScript('https://cdn.sheetjs.com/xlsx-0.20.1/package/dist/xlsx.full.min.js');
         }
 
-        const calendarData = await utils.generateCalendarData();
+        const calendarData = await utils.generateCalendarData(CONFIG.DATA_SOURCES.CALENDAR_CSV);
         const holidayData = await utils.loadHolidayData();
 
         // 建立工作簿
@@ -26,7 +28,7 @@ async function downloadExcel() {
             '備註': d.note
         }));
         const ws1 = XLSX.utils.json_to_sheet(calendarSheet);
-        XLSX.utils.book_append_sheet(wb, ws1, '2026年度行事曆');
+        XLSX.utils.book_append_sheet(wb, ws1, `${CONFIG.YEAR}年度行事曆`);
 
         // 工作表 2: 請假攻略
         const strategiesSheet = holidayData.strategies.map(s => ({
@@ -44,7 +46,7 @@ async function downloadExcel() {
         XLSX.utils.book_append_sheet(wb, ws2, '請假攻略');
 
         // 下載
-        XLSX.writeFile(wb, '2026年請假攻略行事曆.xlsx');
+        XLSX.writeFile(wb, `${CONFIG.YEAR}年請假攻略行事曆.xlsx`);
         utils.showToast('Excel 下載成功！', 'success');
 
     } catch (error) {
@@ -54,7 +56,7 @@ async function downloadExcel() {
 }
 
 // PDF 匯出
-async function downloadPDF() {
+export async function downloadPDF() {
     utils.showToast('正在產生 PDF 檔案...');
 
     try {
@@ -71,10 +73,10 @@ async function downloadPDF() {
 
         // 標題
         doc.setFontSize(24);
-        doc.text('2026 年度行事曆', 148, 20, { align: 'center' });
+        doc.text(`${CONFIG.YEAR} 年度行事曆`, 148, 20, { align: 'center' });
 
         doc.setFontSize(12);
-        doc.text('民國 115 年請假攻略', 148, 30, { align: 'center' });
+        doc.text(`民國 ${CONFIG.ROC_YEAR} 年請假攻略`, 148, 30, { align: 'center' });
 
         // 簡易版本 - 列出主要連假
         const holidayData = await utils.loadHolidayData();
@@ -96,7 +98,7 @@ async function downloadPDF() {
         });
 
         // 下載
-        doc.save('2026年請假攻略行事曆.pdf');
+        doc.save(`${CONFIG.YEAR}年請假攻略行事曆.pdf`);
         utils.showToast('PDF 下載成功！', 'success');
 
     } catch (error) {
@@ -106,11 +108,11 @@ async function downloadPDF() {
 }
 
 // iCal 匯出
-async function downloadICal() {
+export async function downloadICal() {
     utils.showToast('正在產生 iCal 檔案...');
 
     try {
-        const calendarData = await utils.generateCalendarData();
+        const calendarData = await utils.generateCalendarData(CONFIG.DATA_SOURCES.CALENDAR_CSV);
         const holidayData = await utils.loadHolidayData();
 
         let icsContent = [
@@ -119,7 +121,7 @@ async function downloadICal() {
             'PRODID:-//TWCalendar//2026 Holiday Calendar//ZH',
             'CALSCALE:GREGORIAN',
             'METHOD:PUBLISH',
-            'X-WR-CALNAME:2026年行事曆',
+            `X-WR-CALNAME:${CONFIG.YEAR}年行事曆`,
             'X-WR-TIMEZONE:Asia/Taipei'
         ];
 
@@ -164,7 +166,7 @@ async function downloadICal() {
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
-        a.download = '2026年行事曆.ics';
+        a.download = `${CONFIG.YEAR}年行事曆.ics`;
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
@@ -179,7 +181,7 @@ async function downloadICal() {
 }
 
 // PNG 匯出
-async function downloadPNG() {
+export async function downloadPNG() {
     utils.showToast('正在產生圖片...');
 
     try {
@@ -197,7 +199,7 @@ async function downloadPNG() {
         const url = canvas.toDataURL('image/png');
         const a = document.createElement('a');
         a.href = url;
-        a.download = '2026年行事曆.png';
+        a.download = `${CONFIG.YEAR}年行事曆.png`;
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
@@ -211,18 +213,18 @@ async function downloadPNG() {
 }
 
 // 分享功能
-function shareToLine() {
+export function shareToLine() {
     const url = encodeURIComponent(window.location.href);
-    const text = encodeURIComponent('2026年請假攻略！請4天休16天的超長假攻略在這裡 👉');
+    const text = encodeURIComponent(`${CONFIG.YEAR}年請假攻略！請4天休16天的超長假攻略在這裡 👉`);
     window.open(`https://social-plugins.line.me/lineit/share?url=${url}&text=${text}`, '_blank');
 }
 
-function shareToFacebook() {
+export function shareToFacebook() {
     const url = encodeURIComponent(window.location.href);
     window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, '_blank');
 }
 
-function copyLink() {
+export function copyLink() {
     navigator.clipboard.writeText(window.location.href)
         .then(() => utils.showToast('連結已複製！', 'success'))
         .catch(() => utils.showToast('複製失敗', 'error'));
@@ -238,12 +240,3 @@ function loadScript(src) {
         document.head.appendChild(script);
     });
 }
-
-// 匯出到全域
-window.downloadExcel = downloadExcel;
-window.downloadPDF = downloadPDF;
-window.downloadICal = downloadICal;
-window.downloadPNG = downloadPNG;
-window.shareToLine = shareToLine;
-window.shareToFacebook = shareToFacebook;
-window.copyLink = copyLink;

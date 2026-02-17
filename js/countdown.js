@@ -1,8 +1,10 @@
 /**
  * 倒數計時器模組
  */
+import { CONFIG } from './config.js';
+import * as utils from './utils.js';
 
-class CountdownTimer {
+export class CountdownTimer {
     constructor() {
         this.strategies = [];
         this.basicHolidays = []; // 基本連假（不需請假）
@@ -56,7 +58,7 @@ class CountdownTimer {
 
     updateCountdown() {
         if (!this.currentHoliday) {
-            document.getElementById('nextHolidayName').textContent = '2026 年假期已結束';
+            document.getElementById('nextHolidayName').textContent = `${CONFIG.YEAR} 年假期已結束`;
             document.getElementById('nextHolidayDates').textContent = '期待明年的假期！';
             return;
         }
@@ -154,6 +156,3 @@ class CountdownTimer {
         }
     }
 }
-
-// 匯出
-window.CountdownTimer = CountdownTimer;

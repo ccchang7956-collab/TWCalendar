@@ -1,15 +1,31 @@
 /**
  * 主應用程式入口
  */
+import { CalendarComponent } from './calendar.js';
+import { CountdownTimer } from './countdown.js';
+import { StrategiesManager } from './strategies.js';
+import * as utils from './utils.js';
+import * as exportFuncs from './export.js';
+import { CONFIG } from './config.js';
 
 // 全域變數
 let calendar;
 let countdown;
 let strategies;
 
+// 綁定匯出與分享功能到 window，以便 HTML 呼叫
+window.downloadExcel = exportFuncs.downloadExcel;
+window.downloadPDF = exportFuncs.downloadPDF;
+window.downloadICal = exportFuncs.downloadICal;
+window.downloadPNG = exportFuncs.downloadPNG;
+window.shareToLine = exportFuncs.shareToLine;
+window.shareToFacebook = exportFuncs.shareToFacebook;
+window.copyLink = exportFuncs.copyLink;
+
+
 // 應用程式初始化
 async function initApp() {
-    console.log('🚀 正在初始化 2026 請假攻略網站...');
+    console.log(`🚀 正在初始化 ${CONFIG.YEAR} 請假攻略網站...`);
 
     try {
         // 初始化深色模式
@@ -70,7 +86,7 @@ async function initApp() {
 // DOM 載入完成後初始化
 document.addEventListener('DOMContentLoaded', initApp);
 
-// 匯出
+// 匯出 (供除錯用)
 window.calendar = calendar;
 window.countdown = countdown;
 window.strategies = strategies;

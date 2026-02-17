@@ -1,8 +1,10 @@
 /**
  * 行事曆元件模組
  */
+import { CONFIG } from './config.js';
+import * as utils from './utils.js';
 
-class CalendarComponent {
+export class CalendarComponent {
     constructor(containerId) {
         this.container = document.getElementById(containerId);
         this.monthViewEl = document.getElementById('monthView');
@@ -22,7 +24,7 @@ class CalendarComponent {
 
     async init() {
         // 載入資料
-        this.calendarData = await utils.generateCalendarData();
+        this.calendarData = await utils.generateCalendarData(CONFIG.DATA_SOURCES.CALENDAR_CSV);
         const holidayData = await utils.loadHolidayData();
         if (holidayData) {
             this.holidays = holidayData.holidays;
@@ -110,12 +112,12 @@ class CalendarComponent {
 
     prevMonth() {
         if (this.viewMode === 'year') {
-            // 年度檢視不允許切換年份（只限 2026 年）
+            // 年度檢視不允許切換年份（只限 CONFIG.YEAR 年）
             return;
         } else {
             this.currentMonth--;
             if (this.currentMonth < 0) {
-                // 不允許切換到 2025 年
+                // 不允許切換到 CONFIG.YEAR 年之前
                 this.currentMonth = 0;
             }
         }
@@ -124,12 +126,12 @@ class CalendarComponent {
 
     nextMonth() {
         if (this.viewMode === 'year') {
-            // 年度檢視不允許切換年份（只限 2026 年）
+            // 年度檢視不允許切換年份（只限 CONFIG.YEAR 年）
             return;
         } else {
             this.currentMonth++;
             if (this.currentMonth > 11) {
-                // 不允許切換到 2027 年
+                // 不允許切換到 CONFIG.YEAR 年之後
                 this.currentMonth = 11;
             }
         }
@@ -138,8 +140,14 @@ class CalendarComponent {
 
     goToToday() {
         const today = new Date();
-        this.currentMonth = today.getMonth();
-        this.currentYear = today.getFullYear();
+        // 確保回到 CONFIG.YEAR 的今天，如果今天不在 CONFIG.YEAR，則回到 CONFIG.YEAR 的 1 月
+        if (today.getFullYear() === CONFIG.YEAR) {
+            this.currentMonth = today.getMonth();
+            this.currentYear = today.getFullYear();
+        } else {
+            this.currentMonth = 0;
+            this.currentYear = CONFIG.YEAR;
+        }
         this.render();
     }
 
@@ -154,7 +162,7 @@ class CalendarComponent {
     renderMonthView() {
         // 更新標題
         const monthNames = ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'];
-        this.titleEl.textContent = `${this.currentYear} 年 ${monthNames[this.currentMonth]}`;
+        this.titleEl.textContent = `${CONFIG.YEAR} 年 ${monthNames[this.currentMonth]}`;
 
         // 清除現有日期（保留表頭）
         const headers = this.container.querySelectorAll('.calendar-grid__header');
@@ -162,8 +170,9 @@ class CalendarComponent {
         headers.forEach(h => this.container.appendChild(h.cloneNode(true)));
 
         // 取得當月第一天與最後一天
-        const firstDay = new Date(this.currentYear, this.currentMonth, 1);
-        const lastDay = new Date(this.currentYear, this.currentMonth + 1, 0);
+        // 使用 CONFIG.YEAR 確保年份正確
+        const firstDay = new Date(CONFIG.YEAR, this.currentMonth, 1);
+        const lastDay = new Date(CONFIG.YEAR, this.currentMonth + 1, 0);
         const startDayOfWeek = firstDay.getDay();
         const daysInMonth = lastDay.getDate();
 
@@ -176,7 +185,7 @@ class CalendarComponent {
 
         // 填充日期
         for (let day = 1; day <= daysInMonth; day++) {
-            const dateStr = `${this.currentYear}-${String(this.currentMonth + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+            const dateStr = `${CONFIG.YEAR}-${String(this.currentMonth + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
             const dayData = this.calendarData.find(d => d.date === dateStr);
 
             const dayDiv = document.createElement('div');
@@ -231,7 +240,7 @@ class CalendarComponent {
 
     renderYearView() {
         // 更新標題
-        this.titleEl.textContent = `${this.currentYear} 年`;
+        this.titleEl.textContent = `${CONFIG.YEAR} 年`;
 
         // 清空年度檢視容器
         this.yearViewEl.innerHTML = '';
@@ -262,9 +271,9 @@ class CalendarComponent {
                 gridDiv.appendChild(headerDiv);
             });
 
-            // 取得當月資料
-            const firstDay = new Date(this.currentYear, month, 1);
-            const lastDay = new Date(this.currentYear, month + 1, 0);
+            // 取得當月資料 (使用 CONFIG.YEAR)
+            const firstDay = new Date(CONFIG.YEAR, month, 1);
+            const lastDay = new Date(CONFIG.YEAR, month + 1, 0);
             const startDayOfWeek = firstDay.getDay();
             const daysInMonth = lastDay.getDate();
 
@@ -278,7 +287,7 @@ class CalendarComponent {
 
             // 填充日期
             for (let day = 1; day <= daysInMonth; day++) {
-                const dateStr = `${this.currentYear}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+                const dateStr = `${CONFIG.YEAR}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
                 const dayData = this.calendarData.find(d => d.date === dateStr);
 
                 const dayDiv = document.createElement('div');
@@ -341,7 +350,7 @@ class CalendarComponent {
     goToDate(dateStr) {
         const date = new Date(dateStr);
         this.currentMonth = date.getMonth();
-        this.currentYear = date.getFullYear();
+        this.currentYear = CONFIG.YEAR; // 強制使用 CONFIG.YEAR
 
         // 如果在年度檢視，切換到月份檢視
         if (this.viewMode === 'year') {
@@ -366,6 +375,3 @@ class CalendarComponent {
         this.render();
     }
 }
-
-// 匯出
-window.CalendarComponent = CalendarComponent;

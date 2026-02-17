@@ -1,8 +1,9 @@
 /**
  * 請假攻略模組
  */
+import * as utils from './utils.js';
 
-class StrategiesManager {
+export class StrategiesManager {
   constructor(containerId) {
     this.container = document.getElementById(containerId);
     this.strategies = [];
@@ -91,8 +92,11 @@ class StrategiesManager {
         // 自動勾選「顯示建議請假日」
         const checkbox = document.getElementById('showLeaveDays');
         if (checkbox && !checkbox.checked) {
+          // 需要手動觸發 change 事件以更新行事曆
           checkbox.checked = true;
-          this.calendar.showLeaveDays = true;
+          // 觸發 change 事件
+          const event = new Event('change');
+          checkbox.dispatchEvent(event);
         }
         this.calendar.goToDate(strategy.startDate);
       }
@@ -133,6 +137,3 @@ class StrategiesManager {
     });
   }
 }
-
-// 匯出
-window.StrategiesManager = StrategiesManager;

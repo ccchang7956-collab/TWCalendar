@@ -1,6 +1,3 @@
-# robots.txt for TWCalendar
 User-agent: *
 Allow: /
-
-# Sitemap
 Sitemap: https://TWCalendar.shibaalin.com/sitemap.xml

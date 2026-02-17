@@ -2,11 +2,12 @@
  * Service Worker for PWA
  */
 
-const CACHE_NAME = 'tw-calendar-v2026-0217';
+const CACHE_NAME = 'tw-calendar-v2026-0217c';
 const urlsToCache = [
     '/',
     '/index.html',
     '/css/index.css',
+    '/js/config.js',
     '/js/utils.js',
     '/js/calendar.js',
     '/js/countdown.js',
@@ -14,7 +15,9 @@ const urlsToCache = [
     '/js/export.js',
     '/js/app.js',
     '/data/holidays.json',
-    '/manifest.json'
+    '/manifest.json',
+    '/llms.txt',
+    '/llms-full.txt'
 ];
 
 // 安裝事件

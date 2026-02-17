@@ -17,6 +17,7 @@ export class CalendarComponent {
         this.holidays = [];
         this.strategies = [];
         this.leaveDays = new Set();
+        this.calendarDataMap = new Map(); // O(1) 日期查詢索引
         this.showLeaveDays = false; // 預設不顯示建議請假日
         // 桌面版預設年度檢視，手機版預設月份檢視
         this.viewMode = window.innerWidth > 768 ? 'year' : 'month';
@@ -37,6 +38,11 @@ export class CalendarComponent {
                 }
             });
         }
+
+        // 建立日期查詢索引 (Map)
+        this.calendarData.forEach(d => {
+            this.calendarDataMap.set(d.date, d);
+        });
 
         // 初始化檢視模式（同步按鈕狀態和 DOM）
         this.initViewMode();
@@ -186,7 +192,7 @@ export class CalendarComponent {
         // 填充日期
         for (let day = 1; day <= daysInMonth; day++) {
             const dateStr = `${CONFIG.YEAR}-${String(this.currentMonth + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
-            const dayData = this.calendarData.find(d => d.date === dateStr);
+            const dayData = this.calendarDataMap.get(dateStr);
 
             const dayDiv = document.createElement('div');
             dayDiv.className = 'calendar-grid__day';
@@ -247,6 +253,7 @@ export class CalendarComponent {
 
         const monthNames = ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'];
         const dayHeaders = ['日', '一', '二', '三', '四', '五', '六'];
+        const fragment = document.createDocumentFragment();
 
         for (let month = 0; month < 12; month++) {
             const monthDiv = document.createElement('div');
@@ -288,7 +295,7 @@ export class CalendarComponent {
             // 填充日期
             for (let day = 1; day <= daysInMonth; day++) {
                 const dateStr = `${CONFIG.YEAR}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
-                const dayData = this.calendarData.find(d => d.date === dateStr);
+                const dayData = this.calendarDataMap.get(dateStr);
 
                 const dayDiv = document.createElement('div');
                 dayDiv.className = 'year-view__mini-day';
@@ -318,8 +325,10 @@ export class CalendarComponent {
                 this.setViewMode('month');
             });
 
-            this.yearViewEl.appendChild(monthDiv);
+            fragment.appendChild(monthDiv);
         }
+
+        this.yearViewEl.appendChild(fragment);
     }
 
     handleDayClick(dateStr, dayData, holidayInfo) {

@@ -76,20 +76,29 @@ async function initApp() {
         // 初始化漢堡選單
         initMobileMenu();
 
+        // 匯出全域變數（供除錯用）— 必須在 init 完成後才賦值
+        window.calendar = calendar;
+        window.countdown = countdown;
+        window.strategies = strategies;
+
         console.log('🎉 應用程式初始化完成！');
 
     } catch (error) {
         console.error('初始化錯誤:', error);
+        // 顯示使用者可見的錯誤提示
+        const heroTitle = document.getElementById('nextHolidayName');
+        if (heroTitle) {
+            heroTitle.textContent = '⚠️ 資料載入失敗';
+        }
+        const heroDates = document.getElementById('nextHolidayDates');
+        if (heroDates) {
+            heroDates.textContent = '請重新整理頁面，或確認網路連線';
+        }
     }
 }
 
 // DOM 載入完成後初始化
 document.addEventListener('DOMContentLoaded', initApp);
-
-// 匯出 (供除錯用)
-window.calendar = calendar;
-window.countdown = countdown;
-window.strategies = strategies;
 
 // 漢堡選單功能
 function initMobileMenu() {

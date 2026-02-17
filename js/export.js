@@ -77,6 +77,8 @@ export async function downloadPDF() {
 
         doc.setFontSize(12);
         doc.text(`民國 ${CONFIG.ROC_YEAR} 年請假攻略`, 148, 30, { align: 'center' });
+        doc.setFontSize(8);
+        doc.text('* 注意：PDF 中文顯示可能受限於字型支援', 148, 38, { align: 'center' });
 
         // 簡易版本 - 列出主要連假
         const holidayData = await utils.loadHolidayData();
@@ -115,6 +117,16 @@ export async function downloadICal() {
         const calendarData = await utils.generateCalendarData(CONFIG.DATA_SOURCES.CALENDAR_CSV);
         const holidayData = await utils.loadHolidayData();
 
+        // 計算隔天日期（iCal DTEND 規範：全天事件的結束日為不包含的隔天）
+        function nextDay(dateStr) {
+            const d = new Date(dateStr);
+            d.setDate(d.getDate() + 1);
+            const y = d.getFullYear();
+            const m = String(d.getMonth() + 1).padStart(2, '0');
+            const day = String(d.getDate()).padStart(2, '0');
+            return `${y}${m}${day}`;
+        }
+
         let icsContent = [
             'BEGIN:VCALENDAR',
             'VERSION:2.0',
@@ -133,7 +145,7 @@ export async function downloadICal() {
             icsContent.push('BEGIN:VEVENT');
             icsContent.push(`UID:${uid}`);
             icsContent.push(`DTSTART;VALUE=DATE:${dateStr}`);
-            icsContent.push(`DTEND;VALUE=DATE:${dateStr}`);
+            icsContent.push(`DTEND;VALUE=DATE:${nextDay(holiday.date)}`);
             icsContent.push(`SUMMARY:${holiday.name}`);
             icsContent.push(`DESCRIPTION:${holiday.name} - 國定假日`);
             icsContent.push('TRANSP:TRANSPARENT');
@@ -150,7 +162,7 @@ export async function downloadICal() {
                     icsContent.push('BEGIN:VEVENT');
                     icsContent.push(`UID:${uid}`);
                     icsContent.push(`DTSTART;VALUE=DATE:${dateStr}`);
-                    icsContent.push(`DTEND;VALUE=DATE:${dateStr}`);
+                    icsContent.push(`DTEND;VALUE=DATE:${nextDay(leaveDay)}`);
                     icsContent.push(`SUMMARY:💡 建議請假日`);
                     icsContent.push(`DESCRIPTION:${strategy.name} - ${strategy.description}`);
                     icsContent.push('TRANSP:TRANSPARENT');

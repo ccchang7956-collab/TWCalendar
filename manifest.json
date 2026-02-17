@@ -1,8 +1,10 @@
 {
     "name": "115年辦公日曆表",
     "short_name": "115辦公日曆",
-    "description": "民國115年（2026）政府行政機關辦公日曆表，國定假日查詢、請假攻略、互動式行事曆",
+    "description": "民國115年（2026）政府行政機關辦公日曆表。完整9大連假資訊、請假攻略CP值排行、互動式行事曆、Excel/PDF/iCal下載。",
     "start_url": "/",
+    "id": "/",
+    "scope": "/",
     "display": "standalone",
     "background_color": "#FAFAF9",
     "theme_color": "#3B82F6",
@@ -19,6 +21,22 @@
             "sizes": "512x512",
             "type": "image/png",
             "purpose": "any maskable"
+        }
+    ],
+    "shortcuts": [
+        {
+            "name": "查行事曆",
+            "short_name": "行事曆",
+            "description": "查看2026年互動式行事曆",
+            "url": "/#calendar",
+            "icons": [{ "src": "assets/icon-192.png", "sizes": "192x192" }]
+        },
+        {
+            "name": "看請假攻略",
+            "short_name": "請假攻略",
+            "description": "查看2026年請假攻略CP值排行",
+            "url": "/#strategies",
+            "icons": [{ "src": "assets/icon-192.png", "sizes": "192x192" }]
         }
     ],
     "categories": [

@@ -132,7 +132,7 @@ export class StrategiesManager {
 
     this.container.innerHTML = '';
     filtered.forEach(strategy => {
-      const card = this.createStrategyCard(strategy, false);
+      const card = this.createStrategyCard(strategy);
       this.container.appendChild(card);
     });
   }

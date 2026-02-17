@@ -165,22 +165,27 @@ export async function parseCSV(url) {
   });
 }
 
-// 載入假日資料
+// 載入假日資料（含快取，避免重複 fetch）
+let _holidayDataCache = null;
 export async function loadHolidayData() {
+  if (_holidayDataCache) return _holidayDataCache;
   try {
     const response = await fetch('data/holidays.json');
-    return await response.json();
+    _holidayDataCache = await response.json();
+    return _holidayDataCache;
   } catch (error) {
     console.error('Failed to load holiday data:', error);
     return null;
   }
 }
 
-// 產生完整的行事曆資料
+// 產生完整的行事曆資料（含快取）
+let _calendarDataCache = null;
 export async function generateCalendarData(csvUrl = '115年中華民國政府行政機關辦公日曆表.csv') {
+  if (_calendarDataCache) return _calendarDataCache;
   const csvData = await parseCSV(csvUrl);
 
-  return csvData.map(row => {
+  _calendarDataCache = csvData.map(row => {
     const dateStr = row['西元日期'];
     const year = dateStr.substring(0, 4);
     const month = dateStr.substring(4, 6);
@@ -193,6 +198,7 @@ export async function generateCalendarData(csvUrl = '115年中華民國政府行
       note: row['備註'] || ''
     };
   });
+  return _calendarDataCache;
 }
 
 // 防抖函式

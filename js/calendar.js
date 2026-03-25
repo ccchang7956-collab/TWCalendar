@@ -50,6 +50,7 @@ export class CalendarComponent {
         this.initViewMode();
 
         this.render();
+        this.renderStats();
         this.bindEvents();
     }
 
@@ -445,5 +446,67 @@ export class CalendarComponent {
     toggleLunar(show) {
         this.showLunar = show;
         this.render();
+    }
+
+    // 計算年度統計資料
+    calculateStats() {
+        let workDays = 0;
+        let holidayDays = 0;
+        let weekendDays = 0;
+        let compensatoryDays = 0;
+
+        this.calendarData.forEach(day => {
+            const dayOfWeek = new Date(day.date).getDay();
+            const isWeekend = dayOfWeek === 0 || dayOfWeek === 6;
+            const isHoliday = day.isHoliday;
+            const isCompensatory = day.note?.includes('補班') || false;
+
+            if (isWeekend) {
+                weekendDays++;
+            } else if (isCompensatory) {
+                compensatoryDays++;
+            } else if (isHoliday) {
+                holidayDays++;
+            } else {
+                workDays++;
+            }
+        });
+
+        return {
+            totalDays: this.calendarData.length,
+            workDays,
+            holidayDays,
+            weekendDays,
+            compensatoryDays
+        };
+    }
+
+    // 渲染年度統計
+    renderStats() {
+        const statsContainer = document.getElementById('statsContainer');
+        if (!statsContainer) return;
+
+        const stats = this.calculateStats();
+        
+        statsContainer.innerHTML = `
+            <div class="stats-grid">
+                <div class="stats-card">
+                    <span class="stats-card__number">${stats.workDays}</span>
+                    <span class="stats-card__label">上班日</span>
+                </div>
+                <div class="stats-card">
+                    <span class="stats-card__number">${stats.holidayDays}</span>
+                    <span class="stats-card__label">國定假日</span>
+                </div>
+                <div class="stats-card">
+                    <span class="stats-card__number">${stats.weekendDays}</span>
+                    <span class="stats-card__label">週末例假</span>
+                </div>
+                <div class="stats-card">
+                    <span class="stats-card__number">${stats.compensatoryDays}</span>
+                    <span class="stats-card__label">補班日</span>
+                </div>
+            </div>
+        `;
     }
 }

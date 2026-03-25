@@ -32,7 +32,7 @@
 
   <!-- Article Time -->
   <meta property="article:published_time" content="2025-10-01T00:00:00+08:00">
-  <meta property="article:modified_time" content="2026-02-17T00:00:00+08:00">
+  <meta property="article:modified_time" content="2026-03-25T00:00:00+08:00">
 
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
@@ -46,7 +46,7 @@
   <meta property="og:image:type" content="image/png">
   <meta property="og:locale" content="zh_TW">
   <meta property="og:site_name" content="115年辦公日曆表">
-  <meta property="og:updated_time" content="2026-02-17T00:00:00+08:00">
+  <meta property="og:updated_time" content="2026-03-25T00:00:00+08:00">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
@@ -61,7 +61,7 @@
   <meta name="DC.Description" content="2026行事曆（民國115年）最完整懶人包！9大連假、請假攻略、補班日查詢、互動式行事曆。">
   <meta name="DC.Creator" content="TWCalendar">
   <meta name="DC.Language" content="zh-TW">
-  <meta name="DC.Date" content="2026-02-17">
+  <meta name="DC.Date" content="2026-03-25">
 
   <!-- PWA -->
   <meta name="theme-color" content="#3B82F6">
@@ -78,10 +78,14 @@
     "@context": "https://schema.org",
     "@type": "WebApplication",
     "name": "115年辦公日曆表",
+    "alternateName": ["2026行事曆", "115年行事曆", "TWCalendar"],
     "description": "民國115年（2026年）政府行政機關辦公日曆表，完整國定假日一覽、請假攻略、互動式行事曆查詢。",
     "url": "https://TWCalendar.shibaalin.com/",
     "applicationCategory": "UtilitiesApplication",
     "operatingSystem": "All",
+    "browserRequirements": "Requires JavaScript. Supports all modern browsers.",
+    "softwareVersion": "1.0.0",
+    "releaseNotes": "https://github.com/ccchang7956-collab/TWCalendar/releases",
     "offers": {
       "@type": "Offer",
       "price": "0",
@@ -89,99 +93,211 @@
     },
     "author": {
       "@type": "Organization",
-      "name": "TWCalendar"
+      "name": "TWCalendar",
+      "url": "https://TWCalendar.shibaalin.com/"
     },
     "datePublished": "2026-01-01",
+    "dateModified": "2026-03-25",
     "inLanguage": "zh-TW"
+  }
+  </script>
+
+  <!-- Organization Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "@id": "https://TWCalendar.shibaalin.com/#organization",
+    "name": "TWCalendar",
+    "url": "https://TWCalendar.shibaalin.com/",
+    "description": "台灣政府行政機關辦公日曆表查詢工具，提供國定假日、連假資訊與請假攻略。",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://TWCalendar.shibaalin.com/assets/icon-512.png",
+      "width": 512,
+      "height": 512
+    },
+    "sameAs": [
+      "https://github.com/ccchang7956-collab/TWCalendar"
+    ],
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "contactType": "customer service",
+      "url": "https://github.com/ccchang7956-collab/TWCalendar/issues"
+    }
   }
   </script>
 
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "2026年（民國115年）有哪些連假？",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "2026年共有9個連假：元旦(1天)、春節(9天)、228和平紀念日(3天)、兒童清明節(4天)、勞動節(3天)、端午節(3天)、中秋節(4天)、國慶日(3天)、行憲紀念日(3天)。"
+    "@type": "QAPage",
+    "@id": "https://TWCalendar.shibaalin.com/#faq",
+    "mainEntity": {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "2026年（民國115年）有哪些連假？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "2026年共有9個連假：元旦(1天)、春節(9天)、228和平紀念日(3天)、兒童清明節(4天)、勞動節(3天)、端午節(3天)、中秋節(4天)、國慶日(3天)、行憲紀念日(3天)。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "2026年春節過年放幾天？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "2026年農曆春節假期從2月14日（六）到2月22日（日），總共放9天。如果搭配請假攻略，請2/23-2/26四天，可以與228連假串聯，達成「請4休16」的超長假期。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "2026年需要補班嗎？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "根據行政院人事行政總處最新規定，2026年補班日大幅減少。僅在特定節日逢週二或週四時需調整放假及補班，詳細以行政院公告為主。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "5月1日勞動節誰可以放假？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "依據《勞動基準法》，5月1日勞動節為勞工應放假之日（國定假日）。2026年起適用新制，全國放假。適逢星期五可初三節。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "2026請假攻略CP值最高是哪個？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "中秋擴充版（請1天休5天，9/24～9/28）CP值最高達5.0。春節攻略「請4休16」則是最長假期，適合安排長途國外旅遊。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "2026年清明節放幾天？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "2026年兒童節4/4與清明節4/5相鄰，搭配4/3（五）補假、4/6（一）補假，共形成4天連假（4/3～4/6）。若請3/30～4/2共4天可初三節。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "2026年國慶日放幾天？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "2026年國慶日10/10適逢週六，10/9（五）補假，形成3天連假（10/9～10/11）。若請10/8（四）可初三節。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "怎麼下載2026行事曆？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "本站提供多種格式下載：Excel (.xlsx)、PDF、iCal (.ics，可匯入Google/Apple日曆）、PNG圖片。點擊網站下載區即可取得。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "2026和2025連假有什麼差別？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "2026年春節維持9天長假，請假攻略可達16天（2025年最長僅11天）。補班日大幅減少，勞動節改為全國放假，中秋節搭配教師節自動形成4天連假。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "排班制勞工國定假日出勤有什麼權益？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "依《勞動基準法》，排班制勞工若於國定假日出勤，雇主應加倍發給工資（即「雙倍薪」）或給予補假。建議提早與公司確認年度特休額度。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "2026年中秋節放幾天？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "2026年中秋節為9/25（五），與9/28教師節相鄰，共放4天（9/25-9/28）。請9/24（四）可休5天，CP值最高。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "2026年端午節是哪一天？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "2026年端午節為6/19（五），與週末形成3天連假（6/19-6/21）。請6/18（四）可休4天。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "2026年228和平紀念日有連假嗎？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "2026年228和平紀念日為2/28（五），2/27（五）補假，形成3天連假（2/27-3/1）。搭配春節可請2/23-2/26共4天，串聯成16天長假。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "2026年元旦放幾天？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "2026年元旦1/1（四）放假1天。請1/2（五）可初三節，形成4天連假（1/1-1/4）。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "什麼是請假攻略CP值？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "CP值計算公式為：總休假天數 ÷ 請假天數。CP值越高代表用越少的假換取越多的休假天數。例如請1天休5天，CP值就是5.0。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "2026年行憲紀念日有連假嗎？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "2026年行憲紀念日為12/25（五），與週末形成3天連假（12/25-12/27）。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "2026年兒童節放幾天？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "2026年兒童節4/4（六）與清明節4/5（日）相鄰，搭配4/3（五）補假、4/6（一）補假，共4天連假（4/3-4/6）。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "如何查詢2026年國定假日？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "本站提供互動式行事曆，可查看每日是否為國定假日。也可直接瀏覽2026年連假一覽表，或下載Excel/PDF版本。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "2026年有哪些假期需要補班？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "根據行政院人事行政總處最新公告，2026年補班日大幅減少或可能無需補班。詳細資訊請參考人事行政總處公告。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "2026年行事曆資料來源是什麼？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "本站資料來源為行政院人事行政總處公布的「中華民國政府行政機關辦公日曆表」，資料來源為政府資料開放平臺。"
+          }
         }
-      },
-      {
-        "@type": "Question",
-        "name": "2026年春節過年放幾天？",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "2026年農曆春節假期從2月14日（六）到2月22日（日），總共放9天。如果搭配請假攻略，請2/23-2/26四天，可以與228連假串聯，達成「請4休16」的超長假期。"
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "2026年需要補班嗎？",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "根據行政院人事行政總處最新規定，2026年補班日大幅減少。僅在特定節日逢週二或週四時需調整放假及補班，詳細以行政院公告為主。"
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "5月1日勞動節誰可以放假？",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "依據《勞動基準法》，5月1日勞動節為勞工應放假之日（國定假日）。2026年起適用新制，全國放假。適逢星期五可連休3天。"
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "2026請假攻略CP值最高是哪個？",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "中秋擴充版（請1天休5天，9/24～9/28）CP值最高達5.0。春節攻略「請4休16」則是最長假期，適合安排長途國外旅遊。"
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "2026年清明節放幾天？",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "2026年兒童節4/4與清明節4/5相鄰，搭配4/3（五）補假、4/6（一）補假，共形成4天連假（4/3～4/6）。若請3/30～4/2共4天可連休9天。"
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "2026年國慶日放幾天？",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "2026年國慶日10/10適逢週六，10/9（五）補假，形成3天連假（10/9～10/11）。若請10/8（四）可連休4天。"
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "怎麼下載2026行事曆？",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "本站提供多種格式下載：Excel (.xlsx)、PDF、iCal (.ics，可匯入Google/Apple日曆）、PNG圖片。點擊網站下載區即可取得。"
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "2026和2025連假有什麼差別？",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "2026年春節維持9天長假，請假攻略可達16天（2025年最長僅11天）。補班日大幅減少，勞動節改為全國放假，中秋節搭配教師節自動形成4天連假。"
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "排班制勞工國定假日出勤有什麼權益？",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "依《勞動基準法》，排班制勞工若於國定假日出勤，雇主應加倍發給工資（即「雙倍薪」）或給予補假。建議提早與公司確認年度特休額度。"
-        }
-      }
-    ]
+      ]
+    }
   }
   </script>
 
@@ -375,6 +491,14 @@
         "@type": "ImageObject",
         "url": "https://TWCalendar.shibaalin.com/assets/icon-512.png"
       }
+    },
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": {
+        "@type": "EntryPoint",
+        "urlTemplate": "https://TWCalendar.shibaalin.com/?s={search_term_string}"
+      },
+      "query-input": "required name=search_term_string"
     }
   }
   </script>
@@ -467,6 +591,25 @@
         "item": "https://TWCalendar.shibaalin.com/#strategies"
       }
     ]
+  }
+  </script>
+
+  <!-- AboutPage Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "AboutPage",
+    "@id": "https://TWCalendar.shibaalin.com/#about",
+    "name": "關於 TWCalendar",
+    "description": "TWCalendar 提供台灣政府行政機關辦公日曆表查詢，包含國定假日、連假資訊與請假攻略。",
+    "url": "https://TWCalendar.shibaalin.com/",
+    "inLanguage": "zh-TW",
+    "dateModified": "2026-03-25",
+    "author": {
+      "@type": "Organization",
+      "name": "TWCalendar",
+      "url": "https://TWCalendar.shibaalin.com/"
+    }
   }
   </script>
 
@@ -749,6 +892,12 @@
               <button class="calendar-nav__btn" id="nextMonth" aria-label="下個月">▶</button>
             </div>
           </div>
+        </div>
+
+        <!-- 搜尋區塊 -->
+        <div class="calendar-search">
+          <input type="text" id="searchInput" class="calendar-search__input" placeholder="搜尋節日或日期...">
+          <div id="searchResults" class="calendar-search__results"></div>
         </div>
 
         <!-- 月份檢視 -->
@@ -1070,6 +1219,25 @@
 
   <!-- Toast Container -->
   <div class="toast-container" id="toastContainer"></div>
+
+  <!-- Note Modal -->
+  <div class="note-modal" id="noteModal">
+    <div class="note-modal__overlay"></div>
+    <div class="note-modal__content">
+      <div class="note-modal__header">
+        <h3 class="note-modal__title" id="noteModalTitle">新增筆記</h3>
+        <button class="note-modal__close" id="noteModalClose">&times;</button>
+      </div>
+      <div class="note-modal__body">
+        <input type="hidden" id="noteModalDate">
+        <textarea id="noteModalInput" class="note-modal__input" placeholder="輸入筆記內容..." rows="4"></textarea>
+      </div>
+      <div class="note-modal__footer">
+        <button class="note-modal__btn note-modal__btn--delete" id="noteModalDelete">刪除</button>
+        <button class="note-modal__btn note-modal__btn--save" id="noteModalSave">儲存</button>
+      </div>
+    </div>
+  </div>
 
   <!-- Scripts -->
   <script type="module" src="js/app.js"></script>

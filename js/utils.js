@@ -115,6 +115,37 @@ export const storage = {
   }
 };
 
+// 個人筆記操作
+export const notesManager = {
+  KEY: 'twcalendar_notes',
+  
+  getAll() {
+    return storage.get(this.KEY) || {};
+  },
+  
+  get(dateStr) {
+    const notes = this.getAll();
+    return notes[dateStr] || null;
+  },
+  
+  set(dateStr, content) {
+    const notes = this.getAll();
+    notes[dateStr] = content;
+    storage.set(this.KEY, notes);
+  },
+  
+  delete(dateStr) {
+    const notes = this.getAll();
+    delete notes[dateStr];
+    storage.set(this.KEY, notes);
+  },
+  
+  has(dateStr) {
+    const notes = this.getAll();
+    return !!notes[dateStr];
+  }
+};
+
 // 深色模式管理
 export const themeManager = {
   init() {

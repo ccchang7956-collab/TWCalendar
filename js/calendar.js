@@ -4,6 +4,7 @@
 import { CONFIG } from './config.js';
 import * as utils from './utils.js';
 import * as lunar from './lunar.js';
+import { notesManager } from './utils.js';
 
 export class CalendarComponent {
     constructor(containerId) {
@@ -52,6 +53,7 @@ export class CalendarComponent {
         this.render();
         this.renderStats();
         this.bindEvents();
+        this.initNoteModal();
     }
 
     initViewMode() {
@@ -103,6 +105,102 @@ export class CalendarComponent {
         }
         if (yearViewBtn) {
             yearViewBtn.addEventListener('click', () => this.setViewMode('year'));
+        }
+
+        // 搜尋功能
+        const searchInput = document.getElementById('searchInput');
+        if (searchInput) {
+            searchInput.addEventListener('input', (e) => this.handleSearch(e.target.value));
+            searchInput.addEventListener('blur', () => {
+                setTimeout(() => this.clearSearch(), 200);
+            });
+        }
+    }
+
+    handleSearch(query) {
+        const resultsContainer = document.getElementById('searchResults');
+        if (!resultsContainer) return;
+
+        if (!query.trim()) {
+            resultsContainer.innerHTML = '';
+            resultsContainer.classList.remove('active');
+            return;
+        }
+
+        const results = this.searchFestivals(query);
+        
+        if (results.length === 0) {
+            resultsContainer.innerHTML = '<div class="calendar-search__no-results">找不到符合的節日</div>';
+            resultsContainer.classList.add('active');
+            return;
+        }
+
+        resultsContainer.innerHTML = results.map(item => `
+            <div class="calendar-search__result" data-date="${item.date}">
+                <span class="calendar-search__result-date">${item.date}</span>
+                <span class="calendar-search__result-name">${item.name}</span>
+            </div>
+        `).join('');
+
+        resultsContainer.classList.add('active');
+
+        // 點擊結果跳轉到該日期
+        resultsContainer.querySelectorAll('.calendar-search__result').forEach(el => {
+            el.addEventListener('click', () => {
+                const dateStr = el.getAttribute('data-date');
+                this.goToDate(dateStr);
+                this.clearSearch();
+            });
+        });
+    }
+
+    searchFestivals(query) {
+        const results = [];
+        const lowerQuery = query.toLowerCase();
+
+        // 搜尋假日資料
+        this.holidays.forEach(holiday => {
+            if (holiday.name.toLowerCase().includes(lowerQuery) || 
+                holiday.date.includes(query)) {
+                results.push({
+                    date: holiday.date,
+                    name: holiday.name,
+                    type: 'holiday'
+                });
+            }
+        });
+
+        // 搜尋農曆節日
+        this.calendarData.forEach(day => {
+            const [, month, dayNum] = day.date.split('-');
+            const lunarData = lunar.getLunarDate(parseInt(month), parseInt(dayNum));
+            if (lunarData && (lunarData.lunar.includes(lowerQuery) || 
+                (lunarData.festival && lunarData.festival.toLowerCase().includes(lowerQuery)))) {
+                results.push({
+                    date: day.date,
+                    name: lunarData.festival || lunarData.lunar,
+                    type: 'lunar'
+                });
+            }
+        });
+
+        // 移除重複並按日期排序
+        const uniqueResults = results.filter((item, index, self) => 
+            index === self.findIndex(t => t.date === item.date)
+        );
+
+        return uniqueResults.slice(0, 10);
+    }
+
+    clearSearch() {
+        const resultsContainer = document.getElementById('searchResults');
+        const searchInput = document.getElementById('searchInput');
+        if (resultsContainer) {
+            resultsContainer.innerHTML = '';
+            resultsContainer.classList.remove('active');
+        }
+        if (searchInput) {
+            searchInput.value = '';
         }
     }
 
@@ -273,6 +371,11 @@ export class CalendarComponent {
                 dayDiv.appendChild(labelSpan);
             }
 
+            // 個人筆記標記
+            if (notesManager.has(dateStr)) {
+                dayDiv.classList.add('calendar-grid__day--has-note');
+            }
+
             // 點擊事件與無障礙支援
             dayDiv.setAttribute('role', 'button');
             dayDiv.setAttribute('tabindex', '0');
@@ -390,27 +493,83 @@ export class CalendarComponent {
     }
 
     handleDayClick(dateStr, dayData, holidayInfo) {
-        // 找出該日期相關的攻略
-        const relatedStrategy = this.strategies.find(s => {
-            return dateStr >= s.startDate && dateStr <= s.endDate;
+        this.openNoteModal(dateStr, dayData, holidayInfo);
+    }
+
+    openNoteModal(dateStr, dayData, holidayInfo) {
+        const modal = document.getElementById('noteModal');
+        const titleEl = document.getElementById('noteModalTitle');
+        const dateInput = document.getElementById('noteModalDate');
+        const noteInput = document.getElementById('noteModalInput');
+        const deleteBtn = document.getElementById('noteModalDelete');
+
+        if (!modal) return;
+
+        const existingNote = notesManager.get(dateStr);
+        
+        titleEl.textContent = existingNote ? '編輯筆記' : '新增筆記';
+        dateInput.value = dateStr;
+        noteInput.value = existingNote || '';
+        
+        deleteBtn.style.display = existingNote ? 'block' : 'none';
+        
+        modal.classList.add('active');
+        noteInput.focus();
+    }
+
+    closeNoteModal() {
+        const modal = document.getElementById('noteModal');
+        if (modal) {
+            modal.classList.remove('active');
+        }
+    }
+
+    saveNote() {
+        const dateStr = document.getElementById('noteModalDate').value;
+        const content = document.getElementById('noteModalInput').value.trim();
+
+        if (content) {
+            notesManager.set(dateStr, content);
+            utils.showToast('筆記已儲存');
+        } else {
+            notesManager.delete(dateStr);
+            utils.showToast('筆記已刪除');
+        }
+
+        this.closeNoteModal();
+        this.render();
+    }
+
+    deleteNote() {
+        const dateStr = document.getElementById('noteModalDate').value;
+        notesManager.delete(dateStr);
+        utils.showToast('筆記已刪除');
+        this.closeNoteModal();
+        this.render();
+    }
+
+    initNoteModal() {
+        const modal = document.getElementById('noteModal');
+        if (!modal) return;
+
+        const closeBtn = document.getElementById('noteModalClose');
+        const overlay = modal.querySelector('.note-modal__overlay');
+        const saveBtn = document.getElementById('noteModalSave');
+        const deleteBtn = document.getElementById('noteModalDelete');
+
+        closeBtn?.addEventListener('click', () => this.closeNoteModal());
+        overlay?.addEventListener('click', () => this.closeNoteModal());
+        saveBtn?.addEventListener('click', () => this.saveNote());
+        deleteBtn?.addEventListener('click', () => this.deleteNote());
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modal.classList.contains('active')) {
+                this.closeNoteModal();
+            }
+            if (e.key === 'Enter' && e.ctrlKey && modal.classList.contains('active')) {
+                this.saveNote();
+            }
         });
-
-        let message = `📅 ${utils.formatDate(dateStr, 'YYYY年M月D日')} (${utils.getDayOfWeek(dateStr)})`;
-
-        if (dayData?.note) {
-            message += `\n🎉 ${dayData.note}`;
-        }
-
-        if (this.leaveDays.has(dateStr)) {
-            message += '\n💡 建議請假日';
-        }
-
-        if (relatedStrategy) {
-            message += `\n\n🎯 相關攻略：${relatedStrategy.name}`;
-            message += `\n${relatedStrategy.description}`;
-        }
-
-        utils.showToast(message.split('\n')[0]);
     }
 
     // 跳轉到指定日期

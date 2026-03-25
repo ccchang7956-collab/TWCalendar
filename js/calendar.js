@@ -3,6 +3,7 @@
  */
 import { CONFIG } from './config.js';
 import * as utils from './utils.js';
+import * as lunar from './lunar.js';
 
 export class CalendarComponent {
     constructor(containerId) {
@@ -19,6 +20,7 @@ export class CalendarComponent {
         this.leaveDays = new Set();
         this.calendarDataMap = new Map(); // O(1) 日期查詢索引
         this.showLeaveDays = false; // 預設不顯示建議請假日
+        this.showLunar = true; // 預設顯示農曆
         // 桌面版預設年度檢視，手機版預設月份檢視
         this.viewMode = window.innerWidth > 768 ? 'year' : 'month';
     }
@@ -78,6 +80,15 @@ export class CalendarComponent {
         if (showLeaveDaysCheckbox) {
             showLeaveDaysCheckbox.addEventListener('change', (e) => {
                 this.showLeaveDays = e.target.checked;
+                this.render();
+            });
+        }
+
+        // 顯示農曆開關
+        const showLunarCheckbox = document.getElementById('showLunar');
+        if (showLunarCheckbox) {
+            showLunarCheckbox.addEventListener('change', (e) => {
+                this.showLunar = e.target.checked;
                 this.render();
             });
         }
@@ -173,7 +184,9 @@ export class CalendarComponent {
         // 清除現有日期（保留表頭）
         const headers = this.container.querySelectorAll('.calendar-grid__header');
         this.container.innerHTML = '';
-        headers.forEach(h => this.container.appendChild(h.cloneNode(true)));
+
+        const fragment = document.createDocumentFragment();
+        headers.forEach(h => fragment.appendChild(h.cloneNode(true)));
 
         // 取得當月第一天與最後一天
         // 使用 CONFIG.YEAR 確保年份正確
@@ -186,7 +199,7 @@ export class CalendarComponent {
         for (let i = 0; i < startDayOfWeek; i++) {
             const emptyDiv = document.createElement('div');
             emptyDiv.className = 'calendar-grid__day calendar-grid__day--empty';
-            this.container.appendChild(emptyDiv);
+            fragment.appendChild(emptyDiv);
         }
 
         // 填充日期
@@ -222,6 +235,28 @@ export class CalendarComponent {
             numberSpan.textContent = day;
             dayDiv.appendChild(numberSpan);
 
+            // 農曆日期
+            if (this.showLunar) {
+                const lunarData = lunar.getLunarDate(this.currentMonth + 1, day);
+                if (lunarData) {
+                    const lunarSpan = document.createElement('span');
+                    const isImportant = lunar.isImportantFestival(lunarData);
+                    const isFirstFifteenth = lunar.isFirstOrFifteenth(lunarData);
+                    
+                    lunarSpan.className = 'calendar-grid__day-lunar';
+                    if (isImportant || isFirstFifteenth) {
+                        lunarSpan.classList.add('calendar-grid__day-lunar--important');
+                    }
+                    
+                    let lunarText = lunarData.lunar;
+                    if (lunarData.festival) {
+                        lunarText = lunarData.festival;
+                    }
+                    lunarSpan.textContent = lunarText;
+                    dayDiv.appendChild(lunarSpan);
+                }
+            }
+
             // 節日標籤
             if (dayData?.note || holidayInfo) {
                 const labelSpan = document.createElement('span');
@@ -237,11 +272,23 @@ export class CalendarComponent {
                 dayDiv.appendChild(labelSpan);
             }
 
-            // 點擊事件
-            dayDiv.addEventListener('click', () => this.handleDayClick(dateStr, dayData, holidayInfo));
+            // 點擊事件與無障礙支援
+            dayDiv.setAttribute('role', 'button');
+            dayDiv.setAttribute('tabindex', '0');
 
-            this.container.appendChild(dayDiv);
+            const handleDayAction = () => this.handleDayClick(dateStr, dayData, holidayInfo);
+            dayDiv.addEventListener('click', handleDayAction);
+            dayDiv.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    handleDayAction();
+                }
+            });
+
+            fragment.appendChild(dayDiv);
         }
+
+        this.container.appendChild(fragment);
     }
 
     renderYearView() {
@@ -319,10 +366,20 @@ export class CalendarComponent {
 
             monthDiv.appendChild(gridDiv);
 
-            // 點擊月份縮圖切換到月份檢視
-            monthDiv.addEventListener('click', () => {
+            // 點擊月份縮圖切換到月份檢視（無障礙支援）
+            monthDiv.setAttribute('role', 'button');
+            monthDiv.setAttribute('tabindex', '0');
+
+            const changeToMonthView = () => {
                 this.currentMonth = month;
                 this.setViewMode('month');
+            };
+            monthDiv.addEventListener('click', changeToMonthView);
+            monthDiv.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    changeToMonthView();
+                }
             });
 
             fragment.appendChild(monthDiv);
@@ -381,6 +438,12 @@ export class CalendarComponent {
     // 切換顯示建議請假日
     toggleLeaveDays(show) {
         this.showLeaveDays = show;
+        this.render();
+    }
+
+    // 切換顯示農曆
+    toggleLunar(show) {
+        this.showLunar = show;
         this.render();
     }
 }

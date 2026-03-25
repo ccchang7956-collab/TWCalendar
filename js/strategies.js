@@ -80,7 +80,7 @@ export class StrategiesManager {
     `;
 
     // 點擊卡片跳轉到行事曆並自動勾選「顯示建議請假日」
-    card.addEventListener('click', () => {
+    const handleCardClick = () => {
       if (this.calendar) {
         // 移除其他卡片的選中狀態
         this.container.querySelectorAll('.strategy-card').forEach(c => {
@@ -99,6 +99,17 @@ export class StrategiesManager {
           checkbox.dispatchEvent(event);
         }
         this.calendar.goToDate(strategy.startDate);
+      }
+    };
+
+    // 掛載事件與無障礙互動屬性
+    card.setAttribute('role', 'button');
+    card.setAttribute('tabindex', '0');
+    card.addEventListener('click', handleCardClick);
+    card.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        handleCardClick();
       }
     });
 

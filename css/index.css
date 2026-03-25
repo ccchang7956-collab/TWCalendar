@@ -457,6 +457,12 @@ a:hover {
   box-shadow: var(--shadow-md);
 }
 
+.year-view__month:focus,
+.year-view__month:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
 .year-view__month-title {
   font-weight: 600;
   font-size: 0.875rem;
@@ -537,6 +543,12 @@ a:hover {
   background: var(--color-bg-hover);
 }
 
+.calendar-grid__day:focus,
+.calendar-grid__day:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: -2px;
+}
+
 .calendar-grid__day--empty {
   background: var(--color-bg);
 }
@@ -593,6 +605,18 @@ a:hover {
   white-space: nowrap;
 }
 
+.calendar-grid__day-lunar {
+  font-size: 0.6rem;
+  color: var(--color-text-secondary);
+  display: block;
+  margin-top: 2px;
+}
+
+.calendar-grid__day-lunar--important {
+  color: var(--color-holiday);
+  font-weight: 500;
+}
+
 /* =============================================
    Strategies Section
    ============================================= */
@@ -615,6 +639,12 @@ a:hover {
   transform: translateX(4px);
   border-color: var(--color-primary);
   box-shadow: var(--shadow-lg);
+}
+
+.strategy-card:focus,
+.strategy-card:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
 }
 
 .strategy-card--featured {

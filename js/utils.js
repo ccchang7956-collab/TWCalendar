@@ -144,7 +144,10 @@ export const themeManager = {
   updateToggleButton() {
     const btn = document.getElementById('themeToggle');
     const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-    if (btn) btn.textContent = isDark ? '☀️' : '🌙';
+    if (btn) {
+      btn.textContent = isDark ? '☀️' : '🌙';
+      btn.setAttribute('aria-label', isDark ? '切換淺色模式' : '切換深色模式');
+    }
   }
 };
 
@@ -153,13 +156,17 @@ export async function parseCSV(url) {
   const response = await fetch(url);
   const text = await response.text();
   const lines = text.trim().split('\n');
-  const headers = lines[0].split(',');
+  const headers = lines[0].split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
 
   return lines.slice(1).map(line => {
-    const values = line.split(',');
+    const values = line.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
     const obj = {};
     headers.forEach((header, i) => {
-      obj[header.trim()] = values[i]?.trim() || '';
+      let val = values[i]?.trim() || '';
+      if (val.startsWith('"') && val.endsWith('"')) {
+        val = val.substring(1, val.length - 1);
+      }
+      obj[header.trim()] = val;
     });
     return obj;
   });

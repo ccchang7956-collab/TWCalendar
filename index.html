@@ -777,7 +777,12 @@
               <span style="width: 16px; height: 16px; background: #DBEAFE; border-radius: 4px;"></span> 今天
             </span>
           </div>
-          <div style="display: flex; justify-content: flex-end;">
+          <div style="display: flex; justify-content: flex-end; gap: 0.5rem; flex-wrap: wrap;">
+            <label
+              style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; padding: 0.25rem 0.75rem; background: var(--color-bg-card); border: 1px solid var(--color-border); border-radius: 9999px;">
+              <input type="checkbox" id="showLunar" checked style="cursor: pointer;">
+              <span>顯示農曆</span>
+            </label>
             <label
               style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; padding: 0.25rem 0.75rem; background: var(--color-bg-card); border: 1px solid var(--color-border); border-radius: 9999px;">
               <input type="checkbox" id="showLeaveDays" style="cursor: pointer;">
